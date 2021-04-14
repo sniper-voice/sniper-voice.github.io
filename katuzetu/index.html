@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>滑舌例文</title>
+        <style>
+            html {
+                color: #333;
+                background: #FFFFFF;
+            }
+
+            html, body {
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+            }
+
+            body {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            #frame {
+              width: calc(100% - 50px);
+              height: calc(100% - 50px);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            }
+
+            #text {
+                font-weight: bold;
+                font-family: '游ゴシック体', sans-serif;
+                line-height: 1.3;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="frame">
+          <div id="text"></div>
+        </div>
+        <script>
+          document.addEventListener('DOMContentLoaded', async () => {
+            const response = await fetch('katuzetu.json')
+            const examples = await response.json()
+
+            const frame = document.getElementById('frame')
+            const text = document.getElementById('text')
+            const example = examples[Math.floor(examples.length * Math.random())]
+            text.innerHTML = example.replaceAll("\n", "<br>")
+
+            let fontSize = 10 // px dimension
+            for (;;) {
+              text.style.fontSize = fontSize + 'px'
+              if (frame.clientHeight <= text.offsetHeight) {
+                text.style.fontSize = (fontSize - 1) + 'px'
+                const parent = text.parentNode
+                parent.removeChild(text)
+                setTimeout(() => {
+                  parent.appendChild(text)
+                }, 0)
+                break
+              }
+              fontSize += 1
+            }
+          })
+        </script>
+    </body>
+</html>
