@@ -13,10 +13,10 @@
               margin: 0;
               height: 100%;
               overflow: hidden;
+              position: fixed;
             }
 
             body {
-              position: relative;
               display: flex;
               align-items: center;
               justify-content: center;
@@ -44,6 +44,10 @@
         </div>
         <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
         <script>
+          document.addEventListener('touchmove', event => {
+            event.preventDefault();
+          })
+
           function reflesh(target, example) {
             target.innerHTML = example.replaceAll("\n", "<br>")
 
