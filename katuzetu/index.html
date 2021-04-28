@@ -5,20 +5,21 @@
         <title>滑舌例文</title>
         <style>
             html {
-                color: #333;
-                background: #FFFFFF;
+              color: #333;
+              background: #FFFFFF;
             }
 
             html, body {
-                margin: 0;
-                height: 100%;
-                overflow: hidden;
+              margin: 0;
+              height: 100%;
+              overflow: hidden;
             }
 
             body {
-                display: flex;
-                align-items: center;
-                justify-content: center;
+              position: relative;
+              display: flex;
+              align-items: center;
+              justify-content: center;
             }
 
             #frame {
@@ -41,30 +42,55 @@
         <div id="frame">
           <div id="text"></div>
         </div>
+        <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
         <script>
-          document.addEventListener('DOMContentLoaded', async () => {
-            const response = await fetch('katuzetu.json')
-            const examples = await response.json()
-
-            const frame = document.getElementById('frame')
-            const text = document.getElementById('text')
-            const example = examples[Math.floor(examples.length * Math.random())]
-            text.innerHTML = example.replaceAll("\n", "<br>")
+          function reflesh(target, example) {
+            target.innerHTML = example.replaceAll("\n", "<br>")
 
             let fontSize = 10 // px dimension
             for (;;) {
-              text.style.fontSize = fontSize + 'px'
-              if (frame.clientHeight <= text.offsetHeight) {
-                text.style.fontSize = (fontSize - 1) + 'px'
-                const parent = text.parentNode
-                parent.removeChild(text)
+              target.style.fontSize = fontSize + 'px'
+              if (frame.clientHeight <= target.offsetHeight) {
+                target.style.fontSize = (fontSize - 1) + 'px'
+                const parent = target.parentNode
+                parent.removeChild(target)
                 setTimeout(() => {
-                  parent.appendChild(text)
+                  parent.appendChild(target)
                 }, 0)
                 break
               }
               fontSize += 1
             }
+          }
+          document.addEventListener('DOMContentLoaded', async () => {
+            const response = await fetch('katuzetu.json')
+            const examples = await response.json()
+            const frame = document.getElementById('frame')
+            const text = document.getElementById('text')
+            let index = Math.floor(examples.length * Math.random())
+
+            const hammertime = new Hammer(document);
+            hammertime.on('swipeleft', () => {
+              if (0 < index) {
+                index--
+              } else {
+                index = examples.length - 1
+              }
+              reflesh(text, examples[index])
+            })
+            hammertime.on('swiperight', () => {
+              if (examples.length - 1 > index) {
+                index++
+              } else {
+                index = 0
+              }
+              reflesh(text, examples[index])
+            })
+            window.addEventListener('resize', event => {
+              reflesh(text, examples[index])
+            })
+
+            reflesh(text, examples[index])
           })
         </script>
     </body>
