@@ -11,6 +11,7 @@
 
             html, body {
               margin: 0;
+              width: 100%;
               height: 100%;
               overflow: hidden;
               position: fixed;
@@ -35,6 +36,7 @@
                 font-family: '游ゴシック体', sans-serif;
                 line-height: 1.3;
                 margin: 0;
+                word-break: break-all;
             }
         </style>
     </head>
@@ -43,23 +45,36 @@
           <div id="text"></div>
         </div>
         <script>
+
           document.addEventListener('touchmove', event => {
             event.preventDefault();
           })
 
-          function reflesh(target, example) {
+          function delay(milliSec) {
+            return new Promise(resolve => {
+              setTimeout(() => {
+                resolve()
+              }, milliSec)
+            })
+          }
+
+          // To get proper height, reappending the target element is required.
+          function changeFontSize(target, fontSize) {
+            target.style.fontSize = fontSize + 'px'
+            const parent = target.parentNode
+            parent.removeChild(target)
+            parent.appendChild(target)
+          }
+
+          function reflesh(container, target, example) {
             target.innerHTML = example.replaceAll("\n", "<br>")
 
-            let fontSize = 10 // px dimension
+            let fontSize = 10
             for (;;) {
-              target.style.fontSize = fontSize + 'px'
-              if (frame.clientHeight <= target.offsetHeight) {
-                target.style.fontSize = (fontSize - 1) + 'px'
-                const parent = target.parentNode
-                parent.removeChild(target)
-                setTimeout(() => {
-                  parent.appendChild(target)
-                }, 0)
+              changeFontSize(target, fontSize)
+              if (container.clientHeight <= target.clientHeight) {
+                // Make it one previous size so thatl It's within the viewport.
+                changeFontSize(target, fontSize - 1)
                 break
               }
               fontSize += 1
@@ -67,8 +82,7 @@
           }
           document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('katuzetu.json')
-            //const examples = await response.json()
-            const examples = ['雨の宮のお宮の前であんまと尼が雨宿り。雨やむまであんまももうとあんまが申す。\nあんま尼もみ、尼あんまもむ。あんまがうまいか尼がうまいか。あんまも尼も皆うまい']
+            const examples = await response.json()
             const frame = document.getElementById('frame')
             const text = document.getElementById('text')
             let index = Math.floor(examples.length * Math.random())
@@ -87,13 +101,13 @@
                   index = 0
                 }
               }
-              reflesh(text, examples[index])
+              reflesh(frame, text, examples[index])
             })
             window.addEventListener('resize', event => {
-              reflesh(text, examples[index])
+              reflesh(frame, text, examples[index])
             })
 
-            reflesh(text, examples[index])
+            reflesh(frame, text, examples[index])
           })
         </script>
     </body>
