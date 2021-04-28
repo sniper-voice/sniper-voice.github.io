@@ -67,7 +67,8 @@
           }
           document.addEventListener('DOMContentLoaded', async () => {
             const response = await fetch('katuzetu.json')
-            const examples = await response.json()
+            //const examples = await response.json()
+            const examples = ['雨の宮のお宮の前であんまと尼が雨宿り。雨やむまであんまももうとあんまが申す。\nあんま尼もみ、尼あんまもむ。あんまがうまいか尼がうまいか。あんまも尼も皆うまい']
             const frame = document.getElementById('frame')
             const text = document.getElementById('text')
             let index = Math.floor(examples.length * Math.random())
