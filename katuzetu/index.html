@@ -42,7 +42,6 @@
         <div id="frame">
           <div id="text"></div>
         </div>
-        <script src="https://hammerjs.github.io/dist/hammer.min.js"></script>
         <script>
           document.addEventListener('touchmove', event => {
             event.preventDefault();
@@ -73,20 +72,19 @@
             const text = document.getElementById('text')
             let index = Math.floor(examples.length * Math.random())
 
-            const hammertime = new Hammer(document);
-            hammertime.on('swipeleft', () => {
-              if (0 < index) {
-                index--
+            document.addEventListener('click', event => {
+              if (event.clientX < window.innerWidth / 2) {
+                if (0 < index) {
+                  index--
+                } else {
+                  index = examples.length - 1
+                }
               } else {
-                index = examples.length - 1
-              }
-              reflesh(text, examples[index])
-            })
-            hammertime.on('swiperight', () => {
-              if (examples.length - 1 > index) {
-                index++
-              } else {
-                index = 0
+                if (examples.length - 1 > index) {
+                  index++
+                } else {
+                  index = 0
+                }
               }
               reflesh(text, examples[index])
             })
