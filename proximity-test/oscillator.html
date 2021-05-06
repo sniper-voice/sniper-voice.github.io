@@ -1,0 +1,56 @@
+<html>
+  <body>
+    <h1>Oscillator</h1>
+    <button id="playButton">Play</button>
+    <script>
+      function createAudioContext() {
+        let audioContext
+        try {
+          return new (window.AudioContext || window.webkitAudioContext)()
+        } catch (error) {
+          window.alert(
+            `Sorry, but your browser doesn't support the Web Audio API!`
+          )
+        }
+      }
+
+      function createOscillator(context, f) {
+        const oscillator = context.createOscillator()
+        oscillator.type = 'sine'
+        oscillator.frequency.value = f
+        return oscillator
+      }
+
+      function createGain(context, value) {
+        const gain = context.createGain()
+        gain.gain.value = value
+        return gain
+      }
+
+      function build() {
+        const audioContext = createAudioContext()
+        for (let i = 1; i <= 4; i++) {
+          const oscillator = createOscillator(audioContext, i * 100)
+          const gain = createGain(audioContext, 1.0)
+          oscillator.connect(gain)
+          oscillator.start()
+          gain.connect(audioContext.destination)
+        }
+        return audioContext
+      }
+
+      let context
+      const playButton = document.getElementById('playButton')
+      playButton.addEventListener('click', () => {
+        if (playButton.innerHTML === 'Play') {
+          playButton.innerHTML = 'Pause'
+          context = build()
+        } else {
+          playButton.innerHTML = 'Play'
+          context.close()
+          context = null
+        }
+      })
+    </script>
+  </body>
+</html>
