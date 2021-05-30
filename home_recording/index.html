@@ -1,0 +1,266 @@
+<!doctype html>
+<html>
+	<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+    <title>自宅録音環境の検証</title>
+    <style>
+      .Page {
+        width: 883px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.4;
+      }
+
+      @media screen and (max-width: 883px) {
+        .Page {
+          width: 100vw;
+        }
+      }
+
+      .CoverImage {
+        max-width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .Table {
+        border-collapse: collapse;
+      }
+
+      .Table-header {
+        border-left: solid 1px black;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        white-space: nowrap;
+      }
+
+      .Table-header--start {
+        border-left: none;
+      }
+
+      .Table-cell {
+        border-left: solid 1px black;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+
+      .Table-cell--start {
+        border-left: none;
+      }
+
+      .Table-frequencyImage {
+        width: 300px;
+      }
+
+      .Image {
+        width: 200px;
+      }
+
+      .GraphCompare {
+        width: 883px;
+        height: 619px;
+        position: relative;
+        background: #FFFFFF;
+      }
+
+      @media screen and (max-width: 883px) {
+        .GraphCompare {
+          width: 100vw;
+          height: 70vw;
+          position: relative;
+          background: #FFFFFF;
+        }
+      }
+
+      .GraphCompare-itemBack {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      .GraphCompare-itemFront {
+        position: absolute;
+        left: 0;
+        top: 0;
+        filter: opacity(50%);
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body class="Page">
+    <h1>自宅録音環境の検証</h1>
+    <h2>はじめに</h2>
+    <img class="CoverImage" src="booth.jpg">
+    <p>本稿では、自宅でナレーションやボイスドラマの録音をする際の、現実的な範囲で最適な環境設定を追求します。</p>
+
+    <p>欲しいものは:</p>
+    <ul>
+      <li>残響の少ないドライな音</li>
+      <li>演技しやすい姿勢</li>
+      <li>意図した通りの音で取れること(近接効果によって、意図した演出と違うふうに聴こえてしまうようなことがあるとまずい)</li>
+    </ul>
+    <p>これらを得るために、以下の設定がどのように録音結果に影響するのか検証します:</p>
+    <ul>
+      <li>吸音の有無</li>
+      <li>マイクとの距離</li>
+      <li>マイクの指向性有無</li>
+    </ul>
+    <p>なお、著者は音響工学の知識などは持ち合わせておらず、あくまで経験にもとづく独自見解となりますので、参考程度にお考えください。
+    また、素頓狂なことを言っている点などあればご指摘いただけると幸いです。</p>
+    <author>著者: スナイパー武藤<br>連絡先: sniper-voice@protonmail.com</author>
+
+    <h2>結論</h2>
+    <p>マイクとの距離はある程度(50cmくらい)取る。
+    理由は、演技のしやすさたのためです。
+    マイクに近づけ近づくほど残響音が減るのは事実ですが、マイクに貼り付こうとして姿勢を固定したままだと非常に演技がしづらいです。
+    いい発声やいい演技のためにも、上半身が自由でリラックスした姿勢を保てるように、マイクからある程度距離を離します。
+    残響音対策のためだけにマイクに近づくというのは、演者の立場からするとあまり現実的ではないと思います。
+    つまり、多少のノイズよりもいい演技のほうが大事です。
+    </p>
+    <p>マイクから距離を離せば、その分残響音が増え、録れる音はウェットになってしまいます。
+    そのためにも、室内の吸音対策はできる限りのことをします。
+    自宅環境で完璧に残響を除去することは困難なため、残りは<a href="https://www.izotope.com/en/products/rx.html">iZotope RX</a>などのノイズ除去ソフトで対処するのがいい、というのがいまのところのわたしの見解です。
+    </p>
+    <p>また、近接効果を避けるためにマイクと距離を取るべきという話がありますが、わたしが検証した限り、たしかに若干の音の変化はあるものの、
+    そこまで作品の品質に大きな影響を与えるものではないというのが個人的な見解です。
+    近接効果を避けるためではなく、あくまで演技のしやすさのためにマイクとの距離を取ります。</p>
+
+    <h2>環境</h2>
+    <ul>
+      <li>マイク: RODE NT02-A</li>
+      <li>リフレクションフィルター: <a href="https://www.amazon.co.jp/gp/product/B07TMLZVBN">Neewer社のマイクスタンドに付属のもの</a></li>
+      <li>吸音カーテン・ラグ・衝立で吸音</li>
+      <li>卓上にマイクを起き、着席した姿勢で録音</li>
+    </ul>
+    <img class="Image" src="mic.jpg" alt="マイク">
+    <img class="Image" src="partition.jpg" alt="衝立">
+    <img class="Image" src="cartain.jpg" alt="カーテン">
+    <img class="Image" src="rug.jpg" alt="ラグ">
+    <p>壁がつるつるしていて固いと、反射した音が定在波となり、部屋の中で響いている音がそのまま録音されてしまいます。
+    このような残響音を含んだ音をウェットな音、そうでない音をドライな音と言います。
+    録りたいものが屋内を意図したシーンなら良いのですが、そうでない限り、できる限りこのような残響音はなくしたいです。
+    音声に演出意図と異なる余計な色がついてしまい、MA工程での加工もしづらくなるためです。</p>
+    <p>わたしの部屋では、<a href="#ref4">参考4</a>などの指示に従い、部屋の表面をできるだけ柔かい布などで覆うようにしています。
+    カーテンは吸音用のものにし、床は大きめのラグで覆い、ブース背面は、吸音材を貼り付けた自作の衝立で覆って録音します。
+    これらの処理により、なにもしない場合と比べてだいぶドライな音が録れるようになっています。</p>
+
+    <h2>近接効果とは</h2>
+    <p>近接効果とは、指向性マイクにおいて、マイクとの距離が近づくほど低音成分が強くなる現象です。ノイマンのサイトに近接効果の詳しい解説ページがあります。(<a href="#ref5">参考5</a>)。<a href="#ref1">参考1</a>や<a href="#ref4">参考4</a>などでは、近接効果を避けるためにマイクから距離を取るように指南されている一方、<a href="#ref2">参考2</a>のように近接効果を気にせずマイクに近づくよう指南している文献もあり、諸説あります。</p>
+    <p><a href="#ref5">ノイマンのサイト</a>によると、男性の音声に該当する200Hz以下がとくに影響を受けるようです。</p>
+
+    <h2>検証内容</h2>
+    <p>室内吸音の有無、マイク指向性の有無、マイク距離(10cm程度と50cm程度)で、どのように音が変化するかを調べました。吸音なしの場合は、衝立とカーテンを除いた状態で録っています。</p>
+    <p>それぞれ、同一セリフ部分のスペクトル解析の結果も載せています。なにか洞察が得られるかもしれないと思ったからなのですが、周波数画像を並べてみても、たいして得るものはありませんでした。ですが、念のため記録として残しておきます。</p>
+
+    <p>a-1は吸音も指向性もONでマイクも近いため、残響もなく非常にドライに録れています。</p>
+    <p>a-2はa-1からマイク距離のみ変えた状態ですが、やはりじゃっかんの残響が入ってしまっています。</p>
+    <p>a-3。a-1との違いは指向性をOFFにしたこと。ほんのすこしウェットになったように感じます。</p>
+    <p>a-4。a-2から指向性をOFFにした状態。だいぶ残響が強くなったように感じます。</p>
+    <p>a-5。a-1から吸音なしにした状態。近いのでクリアではありますが、すこし残響の響きがあります。</p>
+    <p>a-6。a-2から吸音なしにした状態。ここまでくるとだいぶウェットです。</p>
+    <p>a-7。マイク距離は近いが、吸音も指向性もなし。マイク距離だけでは残響対策として不十分なことがわかります。</p>
+    <p>a-7。マイク距離遠くて吸音も指向性もなし。ものすごくウェットな音になっています。</p>
+
+    <table class="Table">
+      <thead>
+        <tr><th class="Table-header Table-header--start">クリップ</th><th class="Table-header">吸音</th><th class="Table-header">指向性</th><th class="Table-header">マイク距離</th><th class="Table-header">音声</th><th class="Table-header">スペクトル</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="Table-cell Table-cell--start">a-1</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="a-1.mp3"></audio></td><td class="Table-cell"><a href="a-1.png"><img class="Table-frequencyImage" src="a-1.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-2</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="a-2.mp3"></audio></td><td class="Table-cell"><a href="a-2.png"><img class="Table-frequencyImage" src="a-2.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-3</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="a-3.mp3"></audio></td><td class="Table-cell"><a href="a-3.png"><img class="Table-frequencyImage" src="a-3.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-4</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="a-4.mp3"></audio></td><td class="Table-cell"><a href="a-4.png"><img class="Table-frequencyImage" src="a-4.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-5</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="a-5.mp3"></audio></td><td class="Table-cell"><a href="a-5.png"><img class="Table-frequencyImage" src="a-5.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-6</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="a-6.mp3"></audio></td><td class="Table-cell"><a href="a-6.png"><img class="Table-frequencyImage" src="a-6.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-7</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="a-7.mp3"></audio></td><td class="Table-cell"><a href="a-7.png"><img class="Table-frequencyImage" src="a-7.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">a-8</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="a-8.mp3"></audio></td><td class="Table-cell"><a href="a-8.png"><img class="Table-frequencyImage" src="a-8.png" alt="周波数スペクトル"></a></td></tr>
+      </tbody>
+    </table>
+
+    <!--
+    <h2>比較2: サイン波</h2>
+    <p>やってはみたものの、あまりよくわかりませんでした。</p>
+    <table class="Table">
+      <thead>
+        <tr><th class="Table-header Table-header--start">クリップ</th><th class="Table-header">吸音</th><th class="Table-header">指向性</th><th class="Table-header">マイク距離</th><th class="Table-header">音声</th><th class="Table-header">スペクトル</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="Table-cell Table-cell--start">b-1</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="b-1.mp3"></audio></td><td class="Table-cell"><a href="b-1.png"><img class="Table-frequencyImage" src="b-1.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-2</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="b-2.mp3"></audio></td><td class="Table-cell"><a href="b-2.png"><img class="Table-frequencyImage" src="b-2.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-3</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="b-3.mp3"></audio></td><td class="Table-cell"><a href="b-3.png"><img class="Table-frequencyImage" src="b-3.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-4</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="b-4.mp3"></audio></td><td class="Table-cell"><a href="b-4.png"><img class="Table-frequencyImage" src="b-4.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-5</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="b-5.mp3"></audio></td><td class="Table-cell"><a href="b-5.png"><img class="Table-frequencyImage" src="b-5.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-6</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="b-6.mp3"></audio></td><td class="Table-cell"><a href="b-6.png"><img class="Table-frequencyImage" src="b-6.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-7</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="b-7.mp3"></audio></td><td class="Table-cell"><a href="b-7.png"><img class="Table-frequencyImage" src="b-7.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">b-8</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="b-8.mp3"></audio></td><td class="Table-cell"><a href="b-8.png"><img class="Table-frequencyImage" src="b-8.png" alt="周波数スペクトル"></a></td></tr>
+      </tbody>
+    </table>
+    -->
+
+    <!--
+    <h2>比較3: セリフ2(遠くにかける)</h2>
+    <p>やってはみたものの、セリフ1との違いはよくわかりませんでした。</p>
+    <table class="Table">
+      <thead>
+        <tr><th class="Table-header Table-header--start">クリップ</th><th class="Table-header">吸音</th><th class="Table-header">指向性</th><th class="Table-header">マイク距離</th><th class="Table-header">音声</th><th class="Table-header">スペクトル</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="Table-cell Table-cell--start">c-1</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="c-1.mp3"></audio></td><td class="Table-cell"><a href="c-1.png"><img class="Table-frequencyImage" src="c-1.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-2</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="c-2.mp3"></audio></td><td class="Table-cell"><a href="c-2.png"><img class="Table-frequencyImage" src="c-2.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-3</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="c-3.mp3"></audio></td><td class="Table-cell"><a href="c-3.png"><img class="Table-frequencyImage" src="c-3.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-4</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="c-4.mp3"></audio></td><td class="Table-cell"><a href="c-4.png"><img class="Table-frequencyImage" src="c-4.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-5</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="c-5.mp3"></audio></td><td class="Table-cell"><a href="c-5.png"><img class="Table-frequencyImage" src="c-5.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-6</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="c-6.mp3"></audio></td><td class="Table-cell"><a href="c-6.png"><img class="Table-frequencyImage" src="c-6.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-7</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">10cm</td><td class="Table-cell"><audio controls src="c-7.mp3"></audio></td><td class="Table-cell"><a href="c-7.png"><img class="Table-frequencyImage" src="c-7.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">c-8</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell">50cm</td><td class="Table-cell"><audio controls src="c-8.mp3"></audio></td><td class="Table-cell"><a href="c-8.png"><img class="Table-frequencyImage" src="c-8.png" alt="周波数スペクトル"></a></td></tr>
+      </tbody>
+    </table>
+    -->
+
+    <h2>近接効果</h2>
+    <p>近接効果のデモとして、マイクを口元に近づけたり離したりすることで音の変化を見せるというものが<a href="#ref6">ある</a>のですが、これだと、音の大きさ自体が変わってしまうため、その違いが近接効果によるものなのかが、わかりづらいです。</p>
+    <p>近接効果は、無指向のマイクでは起きない現象です。RODE NT2-Aでは、スイッチで指向性の有無を切り替えられます。つまり、近接効果の有無を切り替えられるということです。そこで、マイクに接近した状態で、マイクのスイッチを指向性なしからカーディオイドに切り替えたときに、どのように音が変化するのかを確認しました。
+
+    <p>まずは、100Hz, 200Hz, 300Hz, 400Hz、<a href="oscillator.html">4つのsine波を含んだ波形</a>です。iPhoneでマイクの至近距離から再生しました。</p>
+    <audio controls src="d-1.mp3"></audio>
+    <p>続いて、肉声での変化。指向性なし→あり→なし→ありと3回スイッチを切り替えてます。</p>
+    <audio controls src="d-2.mp3"></audio>
+    <p>周波数スペクトルを比較すると、以下の図のように、30Hz以下くらいの低周波数領域が若干強くなっているのがわかります。</p>
+    <div class="GraphCompare">
+      <img class="GraphCompare-itemBack" src="proximity.png" alt="周波数スペクトル">
+      <img class="GraphCompare-itemFront" style="top: 4px" src="no_proximity.png" alt="周波数スペクトル">
+    </div>
+    <p>たしかに音が変化しているのがわかりますが、微妙な差異で、作品のできばえにそこまでの影響はないように個人的には感じました。
+    近接効果は、録音作業においてあまり気にしなくていいと思います。</p>
+
+    <h2>リフレクションフィルター</h2>
+    <p><a href="#ref1">参考1</a>では、リフレクションフィルターの使用を推奨している方、<a href="#ref3">参考3</a>では、リフレクションフィルター(小型のもの)の使用に懐疑的です。また、素人考えですが、カーディオイド型の指向性を持ったマイクであれば、そもそも背面の音は拾わないため、リフレクションフィルターの有無はあまり関係ないのではないかと思いました。そこで、リフレクションフィルター有無とマイク指向性の有無の組み合わせで、どの程度効果があるのか比較のための音源を録音しました。</p>
+    <p>結果は、わたしの耳には、e-4, e-2, e-3, e-1のように聴こえます。ですが、e-4とe-2, e-3とe-1の違いは非常に微妙で、ほとんど同じように聴こえます。つまり、残響音に与える影響としては、マイクの指向性の影響が遥かに大きく、リフレクションフィルターの効果も多少はあるものの、その違いは非常に微妙というのがわたしの見解です。リフレクションフィルターは余力があれば使ってもいいが、なくてもそれほど変わらないと思います。</p>
+
+    <table class="Table">
+      <thead>
+        <tr><th class="Table-header Table-header--start">クリップ</th><th class="Table-header">リフレクター</th><th class="Table-header">指向性</th><th class="Table-header">音声</th><th class="Table-header">スペクトル</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="Table-cell Table-cell--start">e-1</td><td class="Table-cell">なし</td><td class="Table-cell">なし</td><td class="Table-cell"><audio controls src="e-1.mp3"></audio></td><td class="Table-cell"><a href="e-1.png"><img class="Table-frequencyImage" src="e-1.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">e-2</td><td class="Table-cell">なし</td><td class="Table-cell">あり</td><td class="Table-cell"><audio controls src="e-2.mp3"></audio></td><td class="Table-cell"><a href="e-2.png"><img class="Table-frequencyImage" src="e-2.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">e-3</td><td class="Table-cell">あり</td><td class="Table-cell">なし</td><td class="Table-cell"><audio controls src="e-3.mp3"></audio></td><td class="Table-cell"><a href="e-3.png"><img class="Table-frequencyImage" src="e-3.png" alt="周波数スペクトル"></a></td></tr>
+        <tr><td class="Table-cell Table-cell--start">e-4</td><td class="Table-cell">あり</td><td class="Table-cell">あり</td><td class="Table-cell"><audio controls src="e-4.mp3"></audio></td><td class="Table-cell"><a href="e-4.png"><img class="Table-frequencyImage" src="e-4.png" alt="周波数スペクトル"></a></td></tr>
+      </tbody>
+    </table>
+
+    <h2>参考文献</h2>
+    <ul>
+      <li id="ref1">参考1「<a href="https://www.amazon.co.jp/dp/B075RWPWRS/">はじめてのレコーディング</a>」マイクや道具の基本的な知識からDAWの使いかたまで、初心者向けにひととおり解説されています。</li>
+      <li id="ref2">参考2「<a href="https://www.amazon.co.jp/gp/product/4768309070/">ビデオグラファーのための音声収録&整音ハンドブック</a>」マイクの仕組みなど基礎的な部分から、自宅録音のノウハウがいろいろ解説されています。</li>
+      <li id="ref3">参考3「<a href="http://www.genkosha.co.jp/vs/backnumber/2187.html">VIDEO SALON2021年4月号</a>」ナレーション特集。自宅録音のノウハウなど含めおもしろい記事満載です。</li>
+      <li id="ref4">参考4「<a href="https://partnerhelp.netflixstudios.com/hc/en-us/articles/360047052733-Recording-Dubbed-Dialogue-In-A-Home-Environment">Recording Dubbed Dialogue In A Home Environment</a>」ネットフリックスの演者向け自宅録音ガイド。残響対策やマイクとの距離、おすすめマイクなど実践的なノウハウがいろいろ書かれています。</li>
+      <li id="ref5">参考5「<a href="https://www.neumann.com/homestudio/en/what-is-the-proximity-effect">What is the Proximity Effect? </a>」老舗オーディオ機器メーカー、ノイマンの近接効果解説記事。距離ごとにどの程度変化するかのグラフがあります。</li>
+      <li id="ref6">参考6「<a href="https://www.youtube.com/watch?v=ErMXaJKWOvs">SM58の近接効果は悪いこと？</a>」近接効果を実演したり、近接効果=必ずしもネガティブではないという説明があったりします。ただ、マイク距離を変化させしまうと、他のパラメータも変ってしまうため近接効果の実演としては適切ではない気がします。</li>
+    </ul>
+
+  </body>
+</html>
