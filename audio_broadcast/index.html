@@ -5,16 +5,21 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
     <title>声劇等ライブ配信におけるPCからの配信環境について</title>
     <style>
+      author, address {
+        font-style: normal;
+      }
+
       .Page {
         width: 883px;
         margin-left: auto;
         margin-right: auto;
         line-height: 1.6;
         font-size: 15pt;
+        font-family: serif;
       }
 
-      author, address {
-        font-style: normal;
+      .Heading {
+        font-family: sans-serif;
       }
 
       .ListTitle {
@@ -76,13 +81,13 @@
     </style>
   </head>
   <body class="Page">
-    <h1>声劇等ライブ配信におけるPCからの配信環境について</h1>
+    <h1 class="Heading">声劇等ライブ配信におけるPCからの配信環境について</h1>
     <img class="CoverImage" src="cover_image.jpg">
     <p>本記事では、<a href="https://boikone.jp/">ボイコネ</a>などの音声配信サービスに、PCから、効果音・BGMなどを含めて配信するための機器の接続・設定について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りついた方法です。対象はmacOSですが、Windowsにも応用はできると思います。</p>
 
     <author>著者: スナイパー武藤</author>
     <address>連絡先: sniper-voice@protonmail.com</address>
-    <h2>きっかけ</h2>
+    <h2 class="Heading">きっかけ</h2>
     <p>これまで、配信時には<a href="https://jp.yamaha.com/products/music_production/webcasting_mixer/ag03/index.html">YAMAHA AG03</a>という、ネット配信では定番のオーディオインターフェースを使っていたのですが、ちょっとゆえあって、<a href="https://www.solidstatelogic.com/products/ssl2">SSL2</a>に変えました。しかし、変えてみると、これまでのやりかたではうまくいかないことがわかってきました。理由は、AG03とSSL2の機能の違いです。</p>
 
     <p>AG03の最大の特徴は、PC上で再生される音とマイクからの入力を合成して配信できる、ループバック機能です。一方、SSL2には、そのような便利な機能はありません。違う機種に変えてみて、改めて、AG03はほんとうに便利な機械だったんだなあということを実感しました。PCでの配信をこれからはじめるという方にとりあえず推薦するなら、やはりAG03だと思います。</p>
@@ -91,7 +96,7 @@
 
     <p>この記事で説明する方法では、純粋に自分のマイクの音とDAW(デジタル・オーディオ・ワークステーション=音楽制作ソフト)からの音のみを配信するので、他の演者の音声を二重に配信する心配はありません。</p>
 
-    <h2>二つの配信方法</h2>
+    <h2 class="Heading">二つの配信方法</h2>
 
     <p>本記事では、2つの異なる方法を説明します。ひとつは、「A. オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法」もう一つは、「B. DAW上でマイクと効果音をミックスした上で配信する方法」どちらもメリット・デメリットがあります。</p>
 
@@ -127,7 +132,7 @@
 
     <p>わたしは、遅延のなさと構成のシンプルさから、Aの方法で配信しています。</p>
 
-    <h2>A. オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法</h2>
+    <h2 class="Heading">A. オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法</h2>
 
     <div class="Image">
       <img class="Image-body" src="Audio broadcast - Mix with Audio Interface.jpg" alt="Audio broadcast - Mix with Audio Interface">
@@ -164,11 +169,11 @@
 
     <p>ただ、いくつかハマった点もあったので補足。</p>
 
-    <h3>USBハブを使うとノイズが乗る</h3>
+    <h3 class="Heading">USBハブを使うとノイズが乗る</h3>
 
     <p>まず、DAWとPCの間の接続にUSBハブをかましていたのですが、これだとチャンネル2に強くノイズが乗ってしまって使えませんでした。ハブを経由せずPCと直接接続することで、これは軽減できました。オーディオインターフェースのマニュアルなどにも、USBハブとかは挟まないほうがいいと書いてあるのですが、なるほど、こういうことなんですね。ただし、それでもうっすらではありますが、ノイズは残っているようです(ライブ配信ならこのくらいは許容範囲と判断しています)。</p>
 
-    <h3>ミュートの実現方法</h3>
+    <h3 class="Heading">ミュートの実現方法</h3>
 
     <p>次に、ミュート。声劇中、人のセリフの間は自分のマイクをミュートしておきたいですよね。PCからの配信では、ブラウザ上のミュートボタンをマウスでクリックすると「カチッ」という音が入ってしまうし、操作も煩雑なのでなるべく避けたいです。AG03では、フェーダーを下げるという操作でミュートができていました。SSL2にもチャンネルごとにゲインノブがあるので、これを0にすればミュートできる…と思っていたのです。ところが、SSL2のゲインノブは0まで下げてもミュートにならず、うっすら音が入ってきてしまうのです。これはそういう<a href="https://solidstatelogic.zendesk.com/hc/en-us/articles/360018471777-I-still-see-meters-when-gain-is-all-the-way-down">仕様</a>のようです。なので、別の方法でミュートを実現する必要があります。</p>
 
@@ -176,7 +181,7 @@
 
     <p>そこで、もっといい何かがないかと探していたところ見つけたのが、<a href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/">TOMOCA TCC-60</a>。これはいわゆる<a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%95%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9">カフ</a>というやつで、プロのナレーターの方なんかも現場で使っているようなものです。商品説明にもON/OFF時に雑音を発生しないとあったため、これならイケるかも、と思って試してみたところ、見事に機能してくれました。すばらしい商品です。使っていると、なんかプロっぽい気分になれるという副次効果もあります。ただし、ニッチ向けの商品のため約4万円とかなり高額です。</p>
 
-    <h2>B. DAW上でマイクも含めてすべてをミックスした上で配信する方法</h2>
+    <h2 class="Heading">B. DAW上でマイクも含めてすべてをミックスした上で配信する方法</h2>
 
     <div class="Image">
       <img class="Image" src="Audio broadcast - Mix with software.jpg" alt="Audio broadcast - Mix with software">
@@ -227,11 +232,11 @@
 
     <p>マイクのミュートは、他の効果音と同様APC mini(MIDIコントローラー)から行います。また、配線がソフト上で完結しているので、Aと違ってチャンネル2からノイズが乗ってくることもありません。</p>
 
-    <h3>マイクの遅延</h3>
+    <h3 class="Heading">マイクの遅延</h3>
 
     <p>ただし、マイクの音を一旦PCに取り込んでDAWで処理してから改めて出力という経路になるため、Bの構成では、どうしても遅延が発生します。遅延する自分の声を聞きながらだと演技に支障を来すため、Buffer Sizeをなるべく小さくして遅延を抑えます(図B.4)。64サンプルくらいまで下げると、5ミリ秒程度まで遅延を抑えられました。実際にこの設定で声劇をやってみましたが、まあできなくはない、といった感じでした。</p>
 
-    <h2>ソフト</h2>
+    <h2 class="Heading">ソフト</h2>
 
     <h3><a href="https://www.ableton.com/ja/products/live-lite/">Ableton Live Lite</a></h3>
 
@@ -245,7 +250,7 @@
 
     <p>macOS標準付属のオーディオデバイス設定用アプリ。出力を複数に分岐して同時出力するための仮想オーディオドライバー「複数出力装置」を作成するのに使います。</p>
 
-    <h2>機械</h2>
+    <h2 class="Heading">機械</h2>
 
     <h3><a href="https://www.solidstatelogic.com/products/ssl2">SSL2</a></h3>
 
