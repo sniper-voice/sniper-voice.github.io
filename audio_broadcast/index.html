@@ -1,11 +1,106 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimal-ui"
+    />
     <title>声劇等ライブ配信におけるPCからの配信環境について</title>
     <style>
-      author, address {
+      /*
+	 CSS Reset by Josh W Comeau
+
+	   https://www.joshwcomeau.com/css/custom-css-reset/
+         */
+
+      /*
+	   1. Use a more-intuitive box-sizing model.
+	 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      /*
+	       2. Remove default margin
+	     */
+      * {
+        margin: 0;
+      }
+      /*
+	   3. Allow percentage-based heights in the application
+	 */
+      html,
+      body {
+        height: 100%;
+      }
+      /*
+	   Typographic tweaks!
+	   4. Add accessible line-height
+		   5. Improve text rendering
+	 */
+      body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      /*
+	   6. Improve media defaults
+	 */
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      /*
+	   7. Remove built-in form typography styles
+	 */
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+      /*
+	   8. Avoid text overflows
+	 */
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+      /*
+	   9. Create a root stacking context
+	 */
+      #root,
+      #__next {
+        isolation: isolate;
+      }
+
+      /*
+	 Dedicated styles for this page.
+	 */
+
+      h1,
+      h2 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      author,
+      address {
         font-style: normal;
       }
 
@@ -60,7 +155,13 @@
       }
 
       @media screen and (max-width: 883px) {
-        p, h1, h2, h3, li, author, address {
+        p,
+        h1,
+        h2,
+        h3,
+        li,
+        author,
+        address {
           padding-left: 0.5rem;
           padding-right: 0.5rem;
         }
@@ -77,28 +178,48 @@
           width: 100%;
         }
       }
-
     </style>
   </head>
   <body class="Page">
     <h1 class="Heading">声劇等ライブ配信におけるPCからの配信環境について</h1>
-    <img class="CoverImage" src="cover_image.jpg">
-    <p>本記事では、<a href="https://boikone.jp/">ボイコネ</a>などの音声配信サービスに、PCから、効果音・BGMなどを含めて配信するための機器の接続・設定について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りついた方法です。対象はmacOSですが、Windowsにも応用はできると思います。</p>
+    <img class="CoverImage" src="cover_image.jpg" />
+    <p>
+      本記事では、<a href="https://boikone.jp/">ボイコネ</a
+      >などの音声配信サービスに、PCから、効果音・BGMなどを含めて配信するための機器の接続・設定について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りついた方法です。対象はmacOSですが、Windowsにも応用はできると思います。
+    </p>
 
     <author>著者: スナイパー武藤</author>
     <address>連絡先: sniper-voice@protonmail.com</address>
     <h2 class="Heading">きっかけ</h2>
-    <p>これまで、配信時には<a href="https://jp.yamaha.com/products/music_production/webcasting_mixer/ag03/index.html">YAMAHA AG03</a>という、ネット配信では定番のオーディオインターフェースを使っていたのですが、ちょっとゆえあって、<a href="https://www.solidstatelogic.com/products/ssl2">SSL2</a>に変えました。しかし、変えてみると、これまでのやりかたではうまくいかないことがわかってきました。理由は、AG03とSSL2の機能の違いです。</p>
+    <p>
+      これまで、配信時には<a
+        href="https://jp.yamaha.com/products/music_production/webcasting_mixer/ag03/index.html"
+        >YAMAHA AG03</a
+      >という、ネット配信では定番のオーディオインターフェースを使っていたのですが、ちょっとゆえあって、<a
+        href="https://www.solidstatelogic.com/products/ssl2"
+        >SSL2</a
+      >に変えました。しかし、変えてみると、これまでのやりかたではうまくいかないことがわかってきました。理由は、AG03とSSL2の機能の違いです。
+    </p>
 
-    <p>AG03の最大の特徴は、PC上で再生される音とマイクからの入力を合成して配信できる、ループバック機能です。一方、SSL2には、そのような便利な機能はありません。違う機種に変えてみて、改めて、AG03はほんとうに便利な機械だったんだなあということを実感しました。PCでの配信をこれからはじめるという方にとりあえず推薦するなら、やはりAG03だと思います。</p>
+    <p>
+      AG03の最大の特徴は、PC上で再生される音とマイクからの入力を合成して配信できる、ループバック機能です。一方、SSL2には、そのような便利な機能はありません。違う機種に変えてみて、改めて、AG03はほんとうに便利な機械だったんだなあということを実感しました。PCでの配信をこれからはじめるという方にとりあえず推薦するなら、やはりAG03だと思います。
+    </p>
 
-    <p>ただ、AG03でのループバックモードでの配信について改めて考えると、声劇のような多人数同時配信では、他の人の声も拾って自分の端末から再配信していることになるはずなので、声が二重に聴こえてしまうのではないかという懸念があります。自分の過去の配信でそういう問題が出ていなかったのは、ちょっと不思議です。(もしくは問題が出ていたのに気付かなかった?)</p>
+    <p>
+      ただ、AG03でのループバックモードでの配信について改めて考えると、声劇のような多人数同時配信では、他の人の声も拾って自分の端末から再配信していることになるはずなので、声が二重に聴こえてしまうのではないかという懸念があります。自分の過去の配信でそういう問題が出ていなかったのは、ちょっと不思議です。(もしくは問題が出ていたのに気付かなかった?)
+    </p>
 
-    <p>この記事で説明する方法では、純粋に自分のマイクの音とDAW(デジタル・オーディオ・ワークステーション=音楽制作ソフト)からの音のみを配信するので、他の演者の音声を二重に配信する心配はありません。</p>
+    <p>
+      この記事で説明する方法では、純粋に自分のマイクの音とDAW(デジタル・オーディオ・ワークステーション=音楽制作ソフト)からの音のみを配信するので、他の演者の音声を二重に配信する心配はありません。
+    </p>
 
     <h2 class="Heading">二つの配信方法</h2>
 
-    <p>本記事では、2つの異なる方法を説明します。ひとつは、「A. オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法」もう一つは、「B. DAW上でマイクと効果音をミックスした上で配信する方法」どちらもメリット・デメリットがあります。</p>
+    <p>
+      本記事では、2つの異なる方法を説明します。ひとつは、「A.
+      オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法」もう一つは、「B.
+      DAW上でマイクと効果音をミックスした上で配信する方法」どちらもメリット・デメリットがあります。
+    </p>
 
     <p class="ListTitle">Aメリット:</p>
 
@@ -132,136 +253,258 @@
 
     <p>わたしは、遅延のなさと構成のシンプルさから、Aの方法で配信しています。</p>
 
-    <h2 class="Heading">A. オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法</h2>
+    <h2 class="Heading">
+      A.
+      オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法
+    </h2>
 
     <div class="Image">
-      <img class="Image-body" src="Audio broadcast - Mix with Audio Interface.jpg" alt="Audio broadcast - Mix with Audio Interface">
-      <p class="Image-caption">図A.1 Aのシステム構成。実線はUSBケーブルなど物理的な接続、点線はソフト的な接続を表している。</p>
+      <img
+        class="Image-body"
+        src="Audio broadcast - Mix with Audio Interface.jpg"
+        alt="Audio broadcast - Mix with Audio Interface"
+      />
+      <p class="Image-caption">
+        図A.1
+        Aのシステム構成。実線はUSBケーブルなど物理的な接続、点線はソフト的な接続を表している。
+      </p>
     </div>
 
-    <p>図A.1のようにオーディオインターフェースのチャンネル1にマイクを、オーディオインターフェースのチャンネル2にDAWからの出力(効果音・BGM)を流し込みます。チャンネル2は、PCの外部ヘッドフォン端子(ミニプラグ)に接続して、<a href="https://www.amazon.co.jp/gp/product/B0010CTL66/">てきとうなアダプタ</a>でXLRに変換しています。構成としては直感的で非常にシンンプルです。</p>
+    <p>
+      図A.1のようにオーディオインターフェースのチャンネル1にマイクを、オーディオインターフェースのチャンネル2にDAWからの出力(効果音・BGM)を流し込みます。チャンネル2は、PCの外部ヘッドフォン端子(ミニプラグ)に接続して、<a
+        href="https://www.amazon.co.jp/gp/product/B0010CTL66/"
+        >てきとうなアダプタ</a
+      >でXLRに変換しています。構成としては直感的で非常にシンンプルです。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="A_DAW_Output.png" alt="A DAW Output">
+      <img class="Image-body" src="A_DAW_Output.png" alt="A DAW Output" />
       <p class="Image-caption">図A.2 DAWの出力先は外部ヘッドフォン</p>
     </div>
 
-    <p>DAWの音は、外部ヘッドフォンにして、オーディオインターフェースのチャンネル2に流し込みます。</p>
+    <p>
+      DAWの音は、外部ヘッドフォンにして、オーディオインターフェースのチャンネル2に流し込みます。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="A_Sound_Input.png" alt="A Sound Input">
-      <p class="Image-caption">図A.3 PCの入力はオーディオインターフェースにする。</p>
+      <img class="Image-body" src="A_Sound_Input.png" alt="A Sound Input" />
+      <p class="Image-caption">
+        図A.3 PCの入力はオーディオインターフェースにする。
+      </p>
     </div>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="A_Sound_Output.png" alt="A Sound Output">
-      <p class="Image-caption">図A.4 PCの出力もオーディオインターフェースにする。</p>
+      <img class="Image-body" src="A_Sound_Output.png" alt="A Sound Output" />
+      <p class="Image-caption">
+        図A.4 PCの出力もオーディオインターフェースにする。
+      </p>
     </div>
 
-    <p>PCの入力・出力は両方オーディオインターフェースにしておきます。外部ヘッドフォンにしてしまうと、ブラウザから拾った他の演者の声を再度ブラウザに流してしまうことになるため、注意してください(逆に、他の配信者がいない単独配信でPCの音をすべて拾いたいときなどは、出力を外部ヘッドフォンにすれば良いです)。</p>
+    <p>
+      PCの入力・出力は両方オーディオインターフェースにしておきます。外部ヘッドフォンにしてしまうと、ブラウザから拾った他の演者の声を再度ブラウザに流してしまうことになるため、注意してください(逆に、他の配信者がいない単独配信でPCの音をすべて拾いたいときなどは、出力を外部ヘッドフォンにすれば良いです)。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="A_SSL2_Monitor_Knob.jpg" alt="A SSL2 Monitor Knob">
+      <img
+        class="Image-body"
+        src="A_SSL2_Monitor_Knob.jpg"
+        alt="A SSL2 Monitor Knob"
+      />
       <p class="Image-caption">図A.5 モニターミックスノブは半々でミックス。</p>
     </div>
 
-    <p>SSL2には、XLRケーブル入ってきた音と、USBから入ってきた音(=PCからの出力)をどの程度の割合でスピーカーやヘッドフォンに出すかをモニターミックスノブで調整できます。モニターミックスノブはINPUTとUSB半々にしておきます。これで、共演者の声と自分の配信音両方モニタリングできます。</p>
+    <p>
+      SSL2には、XLRケーブル入ってきた音と、USBから入ってきた音(=PCからの出力)をどの程度の割合でスピーカーやヘッドフォンに出すかをモニターミックスノブで調整できます。モニターミックスノブはINPUTとUSB半々にしておきます。これで、共演者の声と自分の配信音両方モニタリングできます。
+    </p>
 
     <p>ただ、いくつかハマった点もあったので補足。</p>
 
     <h3 class="Heading">USBハブを使うとノイズが乗る</h3>
 
-    <p>まず、DAWとPCの間の接続にUSBハブをかましていたのですが、これだとチャンネル2に強くノイズが乗ってしまって使えませんでした。ハブを経由せずPCと直接接続することで、これは軽減できました。オーディオインターフェースのマニュアルなどにも、USBハブとかは挟まないほうがいいと書いてあるのですが、なるほど、こういうことなんですね。ただし、それでもうっすらではありますが、ノイズは残っているようです(ライブ配信ならこのくらいは許容範囲と判断しています)。</p>
+    <p>
+      まず、DAWとPCの間の接続にUSBハブをかましていたのですが、これだとチャンネル2に強くノイズが乗ってしまって使えませんでした。ハブを経由せずPCと直接接続することで、これは軽減できました。オーディオインターフェースのマニュアルなどにも、USBハブとかは挟まないほうがいいと書いてあるのですが、なるほど、こういうことなんですね。ただし、それでもうっすらではありますが、ノイズは残っているようです(ライブ配信ならこのくらいは許容範囲と判断しています)。
+    </p>
 
     <h3 class="Heading">ミュートの実現方法</h3>
 
-    <p>次に、ミュート。声劇中、人のセリフの間は自分のマイクをミュートしておきたいですよね。PCからの配信では、ブラウザ上のミュートボタンをマウスでクリックすると「カチッ」という音が入ってしまうし、操作も煩雑なのでなるべく避けたいです。AG03では、フェーダーを下げるという操作でミュートができていました。SSL2にもチャンネルごとにゲインノブがあるので、これを0にすればミュートできる…と思っていたのです。ところが、SSL2のゲインノブは0まで下げてもミュートにならず、うっすら音が入ってきてしまうのです。これはそういう<a href="https://solidstatelogic.zendesk.com/hc/en-us/articles/360018471777-I-still-see-meters-when-gain-is-all-the-way-down">仕様</a>のようです。なので、別の方法でミュートを実現する必要があります。</p>
+    <p>
+      次に、ミュート。声劇中、人のセリフの間は自分のマイクをミュートしておきたいですよね。PCからの配信では、ブラウザ上のミュートボタンをマウスでクリックすると「カチッ」という音が入ってしまうし、操作も煩雑なのでなるべく避けたいです。AG03では、フェーダーを下げるという操作でミュートができていました。SSL2にもチャンネルごとにゲインノブがあるので、これを0にすればミュートできる…と思っていたのです。ところが、SSL2のゲインノブは0まで下げてもミュートにならず、うっすら音が入ってきてしまうのです。これはそういう<a
+        href="https://solidstatelogic.zendesk.com/hc/en-us/articles/360018471777-I-still-see-meters-when-gain-is-all-the-way-down"
+        >仕様</a
+      >のようです。なので、別の方法でミュートを実現する必要があります。
+    </p>
 
-    <p>まず、パッと思いついたのが、パッシブプリアンプと呼ばれる、信号増幅を行なわない純粋にレベル調整のみを行う装置をマイクとの間に挟めば、AG03のフェーダーと同じような機能を実現できるのではないかということでした。そこで、<a href="https://www.behringer.com/product.html?modelCode=P0C9G">Behringer社のMONITOR1</a>という商品を試してみました。ところが、これはノブやスイッチの操作をしたときに「バリバリッ」という強烈なノイズが走ってしまいます。これでは、目的の用途には使えません(※すぐ返品しました)。</p>
+    <p>
+      まず、パッと思いついたのが、パッシブプリアンプと呼ばれる、信号増幅を行なわない純粋にレベル調整のみを行う装置をマイクとの間に挟めば、AG03のフェーダーと同じような機能を実現できるのではないかということでした。そこで、<a
+        href="https://www.behringer.com/product.html?modelCode=P0C9G"
+        >Behringer社のMONITOR1</a
+      >という商品を試してみました。ところが、これはノブやスイッチの操作をしたときに「バリバリッ」という強烈なノイズが走ってしまいます。これでは、目的の用途には使えません(※すぐ返品しました)。
+    </p>
 
-    <p>そこで、もっといい何かがないかと探していたところ見つけたのが、<a href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/">TOMOCA TCC-60</a>。これはいわゆる<a href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%95%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9">カフ</a>というやつで、プロのナレーターの方なんかも現場で使っているようなものです。商品説明にもON/OFF時に雑音を発生しないとあったため、これならイケるかも、と思って試してみたところ、見事に機能してくれました。すばらしい商品です。使っていると、なんかプロっぽい気分になれるという副次効果もあります。ただし、ニッチ向けの商品のため約4万円とかなり高額です。</p>
+    <p>
+      そこで、もっといい何かがないかと探していたところ見つけたのが、<a
+        href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/"
+        >TOMOCA TCC-60</a
+      >。これはいわゆる<a
+        href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%95%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9"
+        >カフ</a
+      >というやつで、プロのナレーターの方なんかも現場で使っているようなものです。商品説明にもON/OFF時に雑音を発生しないとあったため、これならイケるかも、と思って試してみたところ、見事に機能してくれました。すばらしい商品です。使っていると、なんかプロっぽい気分になれるという副次効果もあります。ただし、ニッチ向けの商品のため約4万円とかなり高額です。
+    </p>
 
-    <h2 class="Heading">B. DAW上でマイクも含めてすべてをミックスした上で配信する方法</h2>
+    <h2 class="Heading">
+      B. DAW上でマイクも含めてすべてをミックスした上で配信する方法
+    </h2>
 
     <div class="Image">
-      <img class="Image" src="Audio broadcast - Mix with software.jpg" alt="Audio broadcast - Mix with software">
+      <img
+        class="Image"
+        src="Audio broadcast - Mix with software.jpg"
+        alt="Audio broadcast - Mix with software"
+      />
       <p class="Image-caption">図B.1 Bのシステム構成。</p>
     </div>
 
-    <p>こちらは、オーディオインターフェースの1chのみを使います。機械的な配線はこちらのほうがシンプルです。基本的な考えかたとしては、DAW(<a href="https://www.ableton.com/ja/products/live-lite/">Ableton Live Lite</a>)上で必要な音をすべてミックスしてから、オーディオインターフェースに送るという形になります。</p>
+    <p>
+      こちらは、オーディオインターフェースの1chのみを使います。機械的な配線はこちらのほうがシンプルです。基本的な考えかたとしては、DAW(<a
+        href="https://www.ableton.com/ja/products/live-lite/"
+        >Ableton Live Lite</a
+      >)上で必要な音をすべてミックスしてから、オーディオインターフェースに送るという形になります。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="B_DAW_Layout.png" alt="Ableton Live Lite layout">
+      <img
+        class="Image-body"
+        src="B_DAW_Layout.png"
+        alt="Ableton Live Lite layout"
+      />
       <p class="Image-caption">図B.2 Ableton Live Lite上のレイアウト。</p>
     </div>
 
-    <p>DAW上で、図B.2のようにマイクからの入力を取るためのトラックを一つ用意します。残りは効果音やBGMの再生に使います。
-    これでオーディオインターフェースの出力する音は、マイク+効果音・BGMのミックスされた音声になります。</p>
+    <p>
+      DAW上で、図B.2のようにマイクからの入力を取るためのトラックを一つ用意します。残りは効果音やBGMの再生に使います。
+      これでオーディオインターフェースの出力する音は、マイク+効果音・BGMのミックスされた音声になります。
+    </p>
 
-    <p>次に、この音声をモニタリングしつつブラウザから配信するために、macOS標準の<a href="https://ja.wikipedia.org/wiki/Audio_MIDI_%E8%A8%AD%E5%AE%9A">Audio MIDI 設定</a>というアプリと<a href="https://existential.audio/blackhole/">BlackHole</a>という仮想ドライバーを使います。</p>
+    <p>
+      次に、この音声をモニタリングしつつブラウザから配信するために、macOS標準の<a
+        href="https://ja.wikipedia.org/wiki/Audio_MIDI_%E8%A8%AD%E5%AE%9A"
+        >Audio MIDI 設定</a
+      >というアプリと<a href="https://existential.audio/blackhole/">BlackHole</a
+      >という仮想ドライバーを使います。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="B_Audio_MIDI_Setup.png" alt="Audio MIDI Setup">
-      <p class="Image-caption">図B.3 Audio MIDI設定で複数出力装置を作成する。</p>
+      <img
+        class="Image-body"
+        src="B_Audio_MIDI_Setup.png"
+        alt="Audio MIDI Setup"
+      />
+      <p class="Image-caption">
+        図B.3 Audio MIDI設定で複数出力装置を作成する。
+      </p>
     </div>
 
-    <p>Audio MIDI 設定を使うと複数出力装置という特殊な仮想ドライバーを作成できます。これを使い、図B.3のようにオーディオインターフェースとBlackHoleに同時出力するための複数出力装置を作成します。</p>
+    <p>
+      Audio MIDI
+      設定を使うと複数出力装置という特殊な仮想ドライバーを作成できます。これを使い、図B.3のようにオーディオインターフェースとBlackHoleに同時出力するための複数出力装置を作成します。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="B_DAW_Config.png" alt="B DAW Config">
-      <p class="Image-caption">図B.4 DAWの出力先は複合出力装置にする。また遅延対策としてバッファサイズはなるべく減らす。</p>
+      <img class="Image-body" src="B_DAW_Config.png" alt="B DAW Config" />
+      <p class="Image-caption">
+        図B.4
+        DAWの出力先は複合出力装置にする。また遅延対策としてバッファサイズはなるべく減らす。
+      </p>
     </div>
 
-    <p>これを図B.4のようにDAWの出力先として設定すれば、ブラウザに音声配信しつつ、オーディオインターフェースからモニタリングが可能になります。</p>
+    <p>
+      これを図B.4のようにDAWの出力先として設定すれば、ブラウザに音声配信しつつ、オーディオインターフェースからモニタリングが可能になります。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="B_Sound_Input.png" alt="B Sound Input">
+      <img class="Image-body" src="B_Sound_Input.png" alt="B Sound Input" />
       <p class="Image-caption">図B.5 Bのオーディオ入力。</p>
     </div>
 
-    <p>PCのデフォルト入力デバイスはBlackHoleにしておきます。これで、ブラウザがDAWの出力を拾ってくれます。</p>
+    <p>
+      PCのデフォルト入力デバイスはBlackHoleにしておきます。これで、ブラウザがDAWの出力を拾ってくれます。
+    </p>
 
     <div class="Image Image--mini">
-      <img class="Image-body" src="B_Sound_Output.png" alt="B Sound Output">
+      <img class="Image-body" src="B_Sound_Output.png" alt="B Sound Output" />
       <p class="Image-caption">図B.6 Bのオーディオ出力。</p>
     </div>
 
-    <p>PCのデフォルト出力デバイスはオーディオインターフェースにします。共演者の演技をモニターするためです。</p>
+    <p>
+      PCのデフォルト出力デバイスはオーディオインターフェースにします。共演者の演技をモニターするためです。
+    </p>
 
-    <p>モニターすべき音はPCからSSL2にすべてUSB経由で入っているため、SSL2のモニターミックスノブは、USB 100%でOKです。</p>
+    <p>
+      モニターすべき音はPCからSSL2にすべてUSB経由で入っているため、SSL2のモニターミックスノブは、USB
+      100%でOKです。
+    </p>
 
-    <p>マイクのミュートは、他の効果音と同様APC mini(MIDIコントローラー)から行います。また、配線がソフト上で完結しているので、Aと違ってチャンネル2からノイズが乗ってくることもありません。</p>
+    <p>
+      マイクのミュートは、他の効果音と同様APC
+      mini(MIDIコントローラー)から行います。また、配線がソフト上で完結しているので、Aと違ってチャンネル2からノイズが乗ってくることもありません。
+    </p>
 
     <h3 class="Heading">マイクの遅延</h3>
 
-    <p>ただし、マイクの音を一旦PCに取り込んでDAWで処理してから改めて出力という経路になるため、Bの構成では、どうしても遅延が発生します。遅延する自分の声を聞きながらだと演技に支障を来すため、Buffer Sizeをなるべく小さくして遅延を抑えます(図B.4)。64サンプルくらいまで下げると、5ミリ秒程度まで遅延を抑えられました。実際にこの設定で声劇をやってみましたが、まあできなくはない、といった感じでした。</p>
+    <p>
+      ただし、マイクの音を一旦PCに取り込んでDAWで処理してから改めて出力という経路になるため、Bの構成では、どうしても遅延が発生します。遅延する自分の声を聞きながらだと演技に支障を来すため、Buffer
+      Sizeをなるべく小さくして遅延を抑えます(図B.4)。64サンプルくらいまで下げると、5ミリ秒程度まで遅延を抑えられました。実際にこの設定で声劇をやってみましたが、まあできなくはない、といった感じでした。
+    </p>
 
     <h2 class="Heading">ソフト</h2>
 
-    <h3><a href="https://www.ableton.com/ja/products/live-lite/">Ableton Live Lite</a></h3>
+    <h3>
+      <a href="https://www.ableton.com/ja/products/live-lite/"
+        >Ableton Live Lite</a
+      >
+    </h3>
 
     <p>APC miniに付いてくるDAW。主に配信用ポン出しソフトとして使います。</p>
 
     <h3><a href="https://existential.audio/blackhole/">BlackHole</a></h3>
 
-    <p>仮想オーディオドライバー。スピーカーであると同時にマイクのように機能します。BlackHaleを入力デバイスとして使うと、BlackHoleに向けて出力した音がそのまま入力されます。これにより、DAW上でミックスした音をネット配信できます。</p>
+    <p>
+      仮想オーディオドライバー。スピーカーであると同時にマイクのように機能します。BlackHaleを入力デバイスとして使うと、BlackHoleに向けて出力した音がそのまま入力されます。これにより、DAW上でミックスした音をネット配信できます。
+    </p>
 
-    <h3><a href="https://ja.wikipedia.org/wiki/Audio_MIDI_%E8%A8%AD%E5%AE%9A">Audio MIDI 設定</a></h3>
+    <h3>
+      <a href="https://ja.wikipedia.org/wiki/Audio_MIDI_%E8%A8%AD%E5%AE%9A"
+        >Audio MIDI 設定</a
+      >
+    </h3>
 
-    <p>macOS標準付属のオーディオデバイス設定用アプリ。出力を複数に分岐して同時出力するための仮想オーディオドライバー「複数出力装置」を作成するのに使います。</p>
+    <p>
+      macOS標準付属のオーディオデバイス設定用アプリ。出力を複数に分岐して同時出力するための仮想オーディオドライバー「複数出力装置」を作成するのに使います。
+    </p>
 
     <h2 class="Heading">機械</h2>
 
     <h3><a href="https://www.solidstatelogic.com/products/ssl2">SSL2</a></h3>
 
-    <p>2チャンネルの入力ポートを備えたオーディオインターフェース。マイク等からの入力音声とDAW等からの出力音声をミックスしてモニタリングできます(ミックス量はノブで調整可)。</p>
+    <p>
+      2チャンネルの入力ポートを備えたオーディオインターフェース。マイク等からの入力音声とDAW等からの出力音声をミックスしてモニタリングできます(ミックス量はノブで調整可)。
+    </p>
 
     <h3><a href="http://akai-pro.jp/apcmini/">APC mini</a></h3>
 
-    <p>Ableton Liveに接続して使うMIDIコントローラーです。64個のボタンがついており、ソフト上でそれぞれに音源を割り当てて再生したり、フェードをかけるなどの操作行います。</p>
+    <p>
+      Ableton
+      Liveに接続して使うMIDIコントローラーです。64個のボタンがついており、ソフト上でそれぞれに音源を割り当てて再生したり、フェードをかけるなどの操作行います。
+    </p>
 
-    <h3><a href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/">TOMOCA TCC-60</a></h3>
+    <h3>
+      <a href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/"
+        >TOMOCA TCC-60</a
+      >
+    </h3>
 
-    <p>フェーダーで信号のON/OFFを切り替えられます。切り替え時にノイズが発生しません。マイクをミュートするために使います。</p>
+    <p>
+      フェーダーで信号のON/OFFを切り替えられます。切り替え時にノイズが発生しません。マイクをミュートするために使います。
+    </p>
   </body>
 </html>
