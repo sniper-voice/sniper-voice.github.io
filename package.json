@@ -1,0 +1,17 @@
+{
+    "name": "sniper-voice.com",
+    "version": "1.0.0",
+    "main": "index.html",
+    "repository": "https://github.com/sniper-voice/sniper-voice.github.io.git",
+    "author": "tai2 <hello@tai2.net>",
+    "license": "MIT",
+    "scripts": {
+        "prettify": "prettier --write index.html package.json tailwind.config.js",
+        "watch": "tailwindcss -i ./css/input.css -o ./css/styles.css --watch",
+        "build": "tailwindcss -i ./css/input.css -o ./css/styles.css"
+    },
+    "devDependencies": {
+        "prettier": "^2.6.1",
+        "tailwindcss": "^3.0.23"
+    }
+}
