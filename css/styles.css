@@ -547,6 +547,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   white-space: nowrap;
 }
 
+.p-2 {
+  padding: 0.5rem;
+}
+
 .pb-8 {
   padding-bottom: 2rem;
 }
@@ -557,6 +561,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 
 .pl-5 {
   padding-left: 1.25rem;
+}
+
+.pl-2 {
+  padding-left: 0.5rem;
 }
 
 .font-sans {
@@ -612,6 +620,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 @media (min-width: 640px) {
+  .sm\:pl-0 {
+    padding-left: 0px;
+  }
+
   .sm\:text-8xl {
     font-size: 6rem;
     line-height: 1;
