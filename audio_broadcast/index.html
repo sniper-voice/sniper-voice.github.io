@@ -182,13 +182,13 @@
   </head>
   <body class="Page">
     <h1 class="Heading">声劇等ライブ配信におけるPCからの配信環境について</h1>
-    <img class="CoverImage" src="cover_image.jpg" />
+    <img class="CoverImage" src="./cover_image.jpg" />
     <p>
       本記事では、<a href="https://boikone.jp/">ボイコネ</a
       >などの音声配信サービスに、効果音・BGMなどを含めて、PCから配信するための機器の接続・設定について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りついた方法です。Loopbackというアプリに依存するため、対象はmacOS限定です。
     </p>
 
-    <author>著者: スナイパー武藤</author>
+    <author>著者: スナイパー</author>
     <address>連絡先: sniper-voice@protonmail.com</address>
     <h2 class="Heading">きっかけ</h2>
     <p>
@@ -273,7 +273,7 @@
     </p>
 
     <div class="Image">
-      <img class="Image" src="Loopback.png" alt="Loopback Configuration" />
+      <img class="Image-body" src="Loopback.png" alt="Loopback Configuration" />
       <p class="Image-caption">
         図3
         Loopbackの設定。オーディオインターフェースと任意のアプリの音をミックスして、それを再度BlackHoleとオーディオインターフェースに分割出力する。
@@ -370,7 +370,7 @@
 
     <div class="Image">
       <img
-        class="Image"
+        class="Image-body"
         src="Audio broadcast - Mix with Software.jpg"
         alt="Audio broadcast - Mix with Software"
       />
