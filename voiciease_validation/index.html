@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimal-ui"
+    />
+    <title>片手で持てる防音室Voiceaseを検証する</title>
+    <style>
+      /*
+	 CSS Reset by Josh W Comeau
+
+	   https://www.joshwcomeau.com/css/custom-css-reset/
+         */
+
+      /*
+	   1. Use a more-intuitive box-sizing model.
+	 */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      /*
+	       2. Remove default margin
+	     */
+      * {
+        margin: 0;
+      }
+      /*
+	   3. Allow percentage-based heights in the application
+	 */
+      html,
+      body {
+        height: 100%;
+      }
+      /*
+	   Typographic tweaks!
+	   4. Add accessible line-height
+		   5. Improve text rendering
+	 */
+      body {
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      /*
+	   6. Improve media defaults
+	 */
+      img,
+      picture,
+      video,
+      canvas,
+      svg {
+        display: block;
+        max-width: 100%;
+      }
+      /*
+	   7. Remove built-in form typography styles
+	 */
+      input,
+      button,
+      textarea,
+      select {
+        font: inherit;
+      }
+      /*
+	   8. Avoid text overflows
+	 */
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        overflow-wrap: break-word;
+      }
+      /*
+	   9. Create a root stacking context
+	 */
+      #root,
+      #__next {
+        isolation: isolate;
+      }
+
+      /*
+	 Dedicated styles for this page.
+	 */
+
+      h1,
+      h2 {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      p {
+        margin-top: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      author,
+      address {
+        font-style: normal;
+      }
+
+      .Page {
+        width: 883px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+        font-size: 15pt;
+        font-family: serif;
+      }
+
+      .Heading {
+        font-family: sans-serif;
+      }
+
+      .ListTitle {
+        margin-top: 0.5rem;
+        margin-bottom: 0;
+      }
+
+      .List {
+        margin: 0;
+      }
+
+      .CoverImage {
+        max-width: 60%;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .Image {
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .Image-body {
+        width: 100%;
+      }
+
+      .Image-caption {
+        font-size: 12pt;
+        margin-top: 0;
+        margin-left: 5rem;
+        margin-right: 5rem;
+      }
+
+      .Image--mini {
+        width: 70%;
+      }
+
+      .Audio {
+	display: block;
+        width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+      }
+
+      .Audio-data {
+	width: 100%;
+      }
+
+      .Video {
+	display: block;
+        width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+      }
+
+      .Video-data {
+	width: 100%;
+      }
+
+      @media screen and (max-width: 883px) {
+        p,
+        h1,
+        h2,
+        h3,
+        li,
+        author,
+        address {
+          padding-left: 0.5rem;
+          padding-right: 0.5rem;
+        }
+
+        .Page {
+          width: 100vw;
+        }
+
+        .CoverImage {
+          max-width: 100%;
+        }
+
+        .Image--mini {
+          width: 100%;
+        }
+
+        .Table {
+          display: block;
+          overflow: auto;
+        }
+      }
+
+      .Table {
+        border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+      }
+
+      .Table-cell {
+        border-left: solid 1px black;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+      }
+
+      .Table-cell--start {
+        border-left: none;
+      }
+
+    </style>
+  </head>
+  <body class="Page">
+	  <h1 class="Heading">片手で持てる防音室Voiceaseを検証する</h1>
+	  <p>
+	  片手で持てる防音室こと<a href="https://voicease.jp/">Voicease(ボイシーズ)</a>を購入したのでレビューします。
+	  </p>
+
+	  <author>著者: スナイパー</author>
+	  <address>連絡先: sniper-voice@protonmail.com</address>
+
+	  <img class="CoverImage" src="voicease-picture.jpg" />
+
+	  <p>
+	  見れば一目瞭然、筒状のガジェットで、中にマイクを差して、手で持って使うようになってます。
+	  これを使えば近所迷惑にならずに声を出せるという、この配信・動画時代には夢のような道具です。
+	  </p>
+
+	  <p>
+	  この記事では、防音性能と音質を検証します。
+	  わたしは歌をやらないので、用途としては声の演技を想定しています。
+	  わたしの読み上げたセリフを録音しての検証です。セリフは、<a href="https://sound-emotion.jp/voice/voice-sample/">Sound Emotionさんのボイスサンプル原稿集</a>からお借りしました。
+	  防音性能の検証なので、だいぶ声を張り上げています。
+	  </p>
+
+	  <h2>防音性能</h2>
+
+	  <p>
+	  まずは、防音性能です。
+	  わたしの持っている<a href="https://www.amazon.co.jp/gp/product/B00ZERP93W/">デシベル騒音計</a>のA特性モードで測定しました。
+	  参考に、録音時に近くにiPhoneを置いて、iPhoneのマイクで音を録ってみました。
+	  聴こえかたの違いをイメージできると思います。
+	  </p>
+
+	  <p>
+	  使用前は、95.5dB。
+	  </p>
+
+
+	  <div class="Image Image--mini">
+		  <img
+				  class="Image-body"
+				  src="no-voicease-decibel.jpg"
+				  alt="Voicease使用前は95dBくらい"
+				  />
+		  <p class="Image-caption">
+		  写真1
+		  Voicease使用前は95dBくらい
+		  </p>
+	  </div>
+
+	  <div class="Audio"><audio class="Audio-data" controls src="no-voicease-iPhone.mp3"></audio></div>
+
+	  <p>
+	  使用後は、76.8dB。
+	  </p>
+
+	  <div class="Image Image--mini">
+		  <img
+				  class="Image-body"
+				  src="voicease-decibel.jpg"
+				  alt="Voicease使用前は95dBくらい"
+				  />
+		  <p class="Image-caption">
+		  写真2
+		  Voicease使用後は76dBくらい
+		  </p>
+	  </div>
+
+	  <div class="Audio"><audio class="Audio-data" controls src="voicease-iPhone.mp3"></audio></div>
+
+	  <p>20dBくらい低減してくれています。90dBがピアノとかヴォーカル、70dBはテレビの音くらいなので、
+	  だいぶ実用的な防音性能であることがわかります。</p>
+
+	  <h2>音質</h2>
+
+	  <p>次に音質を比較します。マイクはSM58を使用しました。</p>
+
+	  <p>また、公式Youtubeで、<a href="https://www.youtube.com/watch?v=xgIvMezLIvki">Voicease使用時の整音方法が解説されている</a>ため、その方法で整音するために、EQをこのような感じでかけました。</p>
+
+	  <div class="Image Image--mini">
+		  <img
+				  class="Image-body"
+				  src="EQ.png"
+				  alt="EQのかけかた"
+				  />
+		  <p class="Image-caption">
+		  写真3
+		  EQはVoicease公式をやりかたをそのまま真似した
+		  </p>
+	  </div>
+
+	  <table class="Table">
+		  <tbody>
+			  <tr>
+				  <td class="Table-cell Table-cell--start">Voicease未使用での音</td>
+				  <td class="Table-cell"><audio controls src="no-voicease-SM58.mp3"></audio></td>
+			  </tr>
+			  <tr>
+				  <td class="Table-cell Table-cell--start">Voicease使用で未整音の音</td>
+				  <td class="Table-cell"><audio controls src="voicease-raw-SM58.mp3"></audio></td>
+			  </tr>
+			  <tr>
+				  <td class="Table-cell Table-cell--start">Voicease使用で整音済みの音</td>
+				  <td class="Table-cell"><audio controls src="voicease-EQ-SM58.mp3"></audio></td>
+			  </tr>
+		  </tbody>
+	  </table>
+
+
+	  <p>EQをかけると多少変化がありますが、やはりどうしても曇りは残ってしまいます。
+	  音源のスペクトルもを参考までに置いておいます。</p>
+
+	  <div class="Video">
+		  <video class="Video-data" controls src="EQ.mp4"></video>
+	  </div>
+
+
+	  <p>また、Voicease使用時の特徴として、音が外に出ずそのまま入ってくるため、だいぶ音量が大きくなります。</p>
+
+	  <h2>まとめ</h2>
+
+	  <p>防音性能自体はいいのですが、演技に使うのは音質的にきびしいのかなという印象を受けました。
+	  また、仮にEQで音質が改善するとしても、DTMツールの知識がないと厳しいので、万人向けではない気がします。</p>
+
+	  <p>声劇やオーディオドラマ制作には厳しいと思いますが、公式サイトにもあるような、カラオケの練習などにはいいかもしれません。</p>
+
+	  <p>夢のあるコンセプトであることは間違いないので、今後のさらなる改良を期待します。</p>
+  </body>
+</html>
