@@ -1,431 +1,205 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, user-scalable=no, minimal-ui"
-    />
-    <title>声劇等ライブ配信におけるPCからの配信環境について(macOS)</title>
-    <style>
-      /*
-	 CSS Reset by Josh W Comeau
+<html><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimal-ui">
+        <title>声劇等ライブ配信におけるPCからの配信環境について(macOS)</title>
+        <style>
+            /*
+             * CSS Reset by Josh W Comeau
+             *
+             * https://www.joshwcomeau.com/css/custom-css-reset/
+             */
 
-	   https://www.joshwcomeau.com/css/custom-css-reset/
-         */
+            /*
+             * 1. Use a more-intuitive box-sizing model.
+             */
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
 
-      /*
-	   1. Use a more-intuitive box-sizing model.
-	 */
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-      /*
-	       2. Remove default margin
-	     */
-      * {
-        margin: 0;
-      }
-      /*
-	   3. Allow percentage-based heights in the application
-	 */
-      html,
-      body {
-        height: 100%;
-      }
-      /*
-	   Typographic tweaks!
-	   4. Add accessible line-height
-		   5. Improve text rendering
-	 */
-      body {
-        line-height: 1.5;
-        -webkit-font-smoothing: antialiased;
-      }
-      /*
-	   6. Improve media defaults
-	 */
-      img,
-      picture,
-      video,
-      canvas,
-      svg {
-        display: block;
-        max-width: 100%;
-      }
-      /*
-	   7. Remove built-in form typography styles
-	 */
-      input,
-      button,
-      textarea,
-      select {
-        font: inherit;
-      }
-      /*
-	   8. Avoid text overflows
-	 */
-      p,
-      h1,
-      h2,
-      h3,
-      h4,
-      h5,
-      h6 {
-        overflow-wrap: break-word;
-      }
-      /*
-	   9. Create a root stacking context
-	 */
-      #root,
-      #__next {
-        isolation: isolate;
-      }
+            /*
+             * 2. Remove default margin
+             */
+            * {
+                margin: 0;
+            }
 
-      /*
-	 Dedicated styles for this page.
-	 */
+            /*
+             * 3. Allow percentage-based heights in the application
+             */
+            html,
+            body {
+                height: 100%;
+            }
 
-      h1,
-      h2 {
-        margin-top: 1rem;
-        margin-bottom: 1rem;
-      }
+            /*
+             * Typographic tweaks!
+             * 4. Add accessible line-height
+             * 5. Improve text rendering
+             */
+            body {
+                line-height: 1.5;
+                -webkit-font-smoothing: antialiased;
+            }
+            /*
+             * 6. Improve media defaults
+             */
+            img,
+            picture,
+            video,
+            canvas,
+            svg {
+                display: block;
+                max-width: 100%;
+            }
+            /*
+             * 7. Remove built-in form typography styles
+             */
+            input,
+            button,
+            textarea,
+            select {
+                font: inherit;
+            }
+            /*
+             * 8. Avoid text overflows
+             */
+            p,
+            h1,
+            h2,
+            h3,
+            h4,
+            h5,
+            h6 {
+                overflow-wrap: break-word;
+            }
 
-      p {
-        margin-top: 0.75rem;
-        margin-bottom: 0.75rem;
-      }
+            /*
+             * 9. Create a root stacking context
+             */
+            #root,
+            #__next {
+                isolation: isolate;
+            }
 
-      author,
-      address {
-        font-style: normal;
-      }
+            /*
+             * Dedicated styles for this page.
+             */
 
-      .Page {
-        width: 883px;
-        margin-left: auto;
-        margin-right: auto;
-        line-height: 1.6;
-        font-size: 15pt;
-        font-family: serif;
-      }
+            .Page {
+                width: 883px;
+                margin-left: auto;
+                margin-right: auto;
+                line-height: 1.6;
+                font-size: 15pt;
+                font-family: serif;
+            }
 
-      .Heading {
-        font-family: sans-serif;
-      }
+            .Heading {
+                font-family: sans-serif;
+            }
 
-      .ListTitle {
-        margin-top: 0.5rem;
-        margin-bottom: 0;
-      }
+            .Heading--first,
+            .Heading--second {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+            }
 
-      .List {
-        margin: 0;
-      }
+            .Paragraph {
+                margin-top: 0.75rem;
+                margin-bottom: 0.75rem;
+            }
 
-      .CoverImage {
-        max-width: 60%;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-      }
+            .ListTitle {
+                margin-top: 0.5rem;
+                margin-bottom: 0;
+            }
 
-      .Image {
-        width: 100%;
-        margin-left: auto;
-        margin-right: auto;
-      }
+            .List {
+                margin: 0;
+            }
 
-      .Image-body {
-        width: 100%;
-      }
+            .CoverImage {
+                max-width: 60%;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
 
-      .Image-caption {
-        font-size: 12pt;
-        margin-top: 0;
-        margin-left: 5rem;
-        margin-right: 5rem;
-      }
+            .Image {
+                width: calc(100% - 10rem);
+                margin-left: 5rem;
+                margin-right: 5rem;
+            }
 
-      .Image--mini {
-        width: 70%;
-      }
+            .Image-body {
+                width: 100%;
+            }
 
-      @media screen and (max-width: 883px) {
-        p,
-        h1,
-        h2,
-        h3,
-        li,
-        author,
-        address {
-          padding-left: 0.5rem;
-          padding-right: 0.5rem;
-        }
+            .Image-caption {
+                font-size: 12pt;
+                margin-top: 0.5rem;
+                margin-bottom: 1rem;
+            }
 
-        .Page {
-          width: 100vw;
-        }
+            .Image--mini {
+                width: 70%;
+            }
 
-        .CoverImage {
-          max-width: 100%;
-        }
+            .Author,
+            .Address {
+                font-style: normal;
+            }
 
-        .Image--mini {
-          width: 100%;
-        }
-      }
-    </style>
-  </head>
-  <body class="Page">
-    <h1 class="Heading">声劇等ライブ配信におけるPCからの配信環境について</h1>
-    <img class="CoverImage" src="./cover_image.jpg" />
-    <p>
-      本記事では、<a href="https://boikone.jp/">ボイコネ</a
-      >などの音声配信サービスに、効果音・BGMなどを含めて、PCから配信するための機器の接続・設定について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りついた方法です。Loopbackというアプリに依存するため、対象はmacOS限定です。
-    </p>
+            @media screen and (max-width: 883px) {
+                p,
+                h1,
+                h2,
+                h3,
+                li,
+                author,
+                address {
+                    padding-left: 0.5rem;
+                    padding-right: 0.5rem;
+                }
 
-    <author>著者: スナイパー</author>
-    <address>連絡先: sniper-voice@protonmail.com</address>
-    <h2 class="Heading">きっかけ</h2>
-    <p>
-      これまで、配信時には<a
-        href="https://jp.yamaha.com/products/music_production/webcasting_mixer/ag03/index.html"
-        >YAMAHA AG03</a
-      >という、ネット配信では定番のオーディオインターフェースを使っていたのですが、ちょっとゆえあって、<a
-        href="https://www.solidstatelogic.com/products/ssl2"
-        >SSL2</a
-      >に変えました。しかし、変えてみると、これまでのやりかたではうまくいかないことがわかってきました。理由は、AG03とSSL2の機能の違いです。
-    </p>
+                .Page {
+                    width: 100vw;
+                }
 
-    <p>
-      AG03の特徴のひとつに、PC上で再生される音とマイクからの入力を合成して配信できる、ループバック機能があります。一方、SSL2には、そのような便利な機能はありません。違う機種に変えてみて、改めて、AG03はほんとうに便利な機械だったんだなあということを実感しました。PCでの配信をこれからはじめるという方にとりあえず推薦するなら、やはりAG03だと思います。
-    </p>
+                .CoverImage {
+                    max-width: 100%;
+                }
 
-    <p>
-      ただ、AG03でのループバックモードでの配信について改めて考えると、声劇のような多人数同時配信では、他の人の声も拾って自分の端末から再配信していることになるはずなので、共演者の声が二重に聴こえてしまうのではないかという懸念があります。自分の過去の配信でそういう問題が出ていなかったのは、ちょっと不思議です。(もしくは問題が出ていたのに気付かなかった?)
-    </p>
+                .Image--mini {
+                    width: 100%;
+                }
+            }
+        </style>
+    </head>
+    <body class="Page"><h1 data-decor-element="heading1" class="Heading Heading--first">声劇等ライブ配信におけるPCからの配信環境について</h1><img class="CoverImage" src="./cover_image.jpg" alt="著者の配信機材">
 
-    <p>
-      この記事で説明する方法では、純粋に自分のマイクの音とDAW(デジタル・オーディオ・ワークステーション=音楽制作ソフト)からの音のみを配信するので、他の演者の音声を二重に配信する心配はありません。
-    </p>
+<p data-decor-element="paragraph" class="Paragraph">本記事では、<a data-decor-element="link" href="https://boikone.jp/">ボイコネ</a>などの音声配信サービスに、効果音・BGMなどを含めて、PCから配信するための機器の接続・設について解説します。ループバック機能のないオーディオインターフェースでいかにループバックを実現するか、ド素人なりに試行錯誤して辿りつい方法です。Loopbackというアプリに依存するため、対象はmacOS限定です。</p><p data-decor-element="paragraph" class="Paragraph"><author>著者: スナイパー</author></p><address>連絡先: sniper-voice@protonmail.com</address>
 
-    <h2 class="Heading">LoopbackとBlackHoleでループバックを実現する</h2>
-
-    <p>
-      BGM・SEのルーティングとミックスをいかにシンプルな構成で実現するか。これにいろいろ苦心しましたが、なかなか完璧な答に辿り着けませんでした。が、<a
-        href="https://rogueamoeba.com/loopback/"
-        >Loopback</a
-      >というアプリに出会って、ついにやりたいことが簡潔に実現できました。
-    </p>
-
-    <p>
-      Loopbackを使えば、オーディオデバイスやアプリのオーディオ出力を繋いでまとめたり、スプリットしたりが自由にできます。チャンネルごとに配線できるので、モノラルの音声をステレオに変換したり、ステレオをモノラルにまとめたりもできます。Loopbackはそれ自体、仮想オーディオ出力デバイスとして使えます。
-    </p>
-    <p>
-      もうひとつキーになるソフトが、<a
-        href="https://existential.audio/blackhole/"
-        >BlackHole</a
-      >という仮想オーディオデバイスで、これひとつで出力デバイス兼入力デバイスとして機能します。このデバイスに対して音を流し込むと、このデバイスを入力として使っているアプリにその音をそのまま取り込めます。つまり、Loopback上でミックスした音をブラウザ等から配信できるのです。
-    </p>
-    <p>
-      LoopbackとBlackHoleを合わせれば、およそ配信時にやりたいどんな構成でも実現できると思います。
-    </p>
-
-    <div class="Image">
-      <img
-        class="Image"
-        src="Audio broadcast - Mix with Loopback.app.jpg"
-        alt="Audio broadcast - Mix with Loopback.app"
-      />
-      <p class="Image-caption">
-        図1
-        Loopbackでマイクと効果音・BGMをミックスして、BlackHoleからブラウザに流す構成
-      </p>
-    </div>
-
-    <p>
-      マイクの入力は、オーディオインターフェースを通じて、図1のVoiceというラベルのついた線でLoopbackに流し込みます。
-    </p>
-
-    <p>
-      BGM・SEは、音源を再生できるアプリならなんでもいいのですが、わたしは、<a
-        href="http://akai-pro.jp/apcmini/"
-        >APC mini</a
-      >というMIDIコントローラーについてきた<a
-        href="https://www.ableton.com/ja/products/live-lite/"
-        >Ableton Live Lite</a
-      >というDAWを使っています。DAWの出力デバイスを図2のようにLoopbackにすると、LoopbackのPass-Thruソースから信号が入ってきます(後述)。
-    </p>
-
-    <div class="Image Image--mini">
-      <img class="Image-body" src="DAW_Output.png" alt="DAW Output" />
-      <p class="Image-caption">図2 DAWの出力先はLoopback</p>
-    </div>
-
-    <p>
-      それらの信号は、図3のようにLoopback上でミックスされ、BlackHoleに再出力されます(Channels
-      1&amp;2)。オーディオインターフェースからの入力(マイク)をオーディオインターフェースにもどしてしまうと、モニタリング時に遅延が生じて気持ち悪いので、オーディオンターフェースからの音はBlackHoleにのみ流します。逆にPath-Thruから入ってきたBGM・SEは、二手に分岐させて片方をオーディオインターフェースに流します(Channels
-      3&amp;4)。BlackHoleはブラウザへの入力用、オーディオインターフェースはBGM・SEのモニター用です。
-    </p>
-
-    <div class="Image">
-      <img class="Image-body" src="Loopback.png" alt="Loopback Configuration" />
-      <p class="Image-caption">
-        図3
-        Loopbackの設定。オーディオインターフェースと任意のアプリの音をミックスして、それを再度BlackHoleとオーディオインターフェースに分割出力する。
-      </p>
-    </div>
-
-    <p>
-      PCのデフォルト出力は図4のようにオーディオインターフェースを直接指定します。Loopbackを指定すると共演者の音声まで再配信してしまうことになるので注意してください。逆に個人配信のフリートークなどで、PC上で再生される音すべて拾ってストリーミングしたい場合は、Loopbackを指定すれば良いです。
-    </p>
-
-    <div class="Image Image--mini">
-      <img class="Image-body" src="Sound_Output.png" alt="B Sound Output" />
-      <p class="Image-caption">
-        図4
-        PCの出力(=共演者の音声)はオーディオインターフェースへダイレクトに出す。
-      </p>
-    </div>
-
-    <p>
-      SSL2には、XLRケーブル入ってきた音と、USBから入ってきた音(=PCからの出力)をどの程度の割合でスピーカーやヘッドフォンに出すかをモニターミックスノブで調整する機能が搭載されています。この構成では、自分の声は、オーディオインターフェースでダイレクトニモニター、BGM・効果音はPCからUSBを通って流れてくるくるため、モニターミックスノブは、INPUTとUSB
-      を半々にしておきます。これで、共演者の声を含めすべての音声をモニタリングできるようになります。
-    </p>
-
-    <div class="Image Image--mini">
-      <img
-        class="Image-body"
-        src="SSL2_Monitor_Knob.jpg"
-        alt="SSL2 Monitor Knob"
-      />
-      <p class="Image-caption">図5 モニターミックスノブは半々でミックス。</p>
-    </div>
-
-    <h3 class="Heading">ミュートの実現方法</h3>
-
-    <p>
-      声劇中、人のセリフの間は自分のマイクをミュートしておきたいですよね。PCからの配信では、ブラウザ上のミュートボタンをマウスでクリックすると「カチッ」という音が入ってしまうし、操作も煩雑なのでなるべく避けたいです。AG03では、フェーダーを下げるという操作でミュートができていました。SSL2にもチャンネルごとにゲインノブがあるので、これを0にすればミュートできる…と思っていたのです。ところが、SSL2のゲインノブは0まで下げてもミュートにならず、うっすら音が入ってきてしまうのです。これはそういう<a
-        href="https://solidstatelogic.zendesk.com/hc/en-us/articles/360018471777-I-still-see-meters-when-gain-is-all-the-way-down"
-        >仕様</a
-      >のようです。なので、別の方法でミュートを実現する必要があります。
-    </p>
-
-    <p>
-      まず、パッと思いついたのが、パッシブプリアンプと呼ばれる、信号増幅を行なわない純粋にレベル調整のみを行う装置をマイクとの間に挟めば、AG03のフェーダーと同じような機能を実現できるのではないかということでした。そこで、<a
-        href="https://www.behringer.com/product.html?modelCode=P0C9G"
-        >Behringer社のMONITOR1</a
-      >という商品を試してみました。ところが、これはノブやスイッチの操作をしたときに「バリバリッ」という強烈なノイズが走ってしまいます。これでは、目的の用途には使えません(※すぐ返品しました)。
-    </p>
-
-    <p>
-      そこで、もっといい何かがないかと探していたところ見つけたのが、<a
-        href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/"
-        >TOMOCA TCC-60</a
-      >。これはいわゆる<a
-        href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%95%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9"
-        >カフ</a
-      >というやつで、プロのナレーターの方なんかも現場で使っているようなものです。商品説明にもON/OFF時に雑音を発生しないとあったため、これならイケるかも、と思って試してみたところ、見事に機能してくれました。すばらしい商品です。使っていると、なんかプロっぽい気分になれるという副次効果もあります。ただし、ニッチ向けの商品のため約4万円とかなり高額です。
-    </p>
-
-    <h2 class="Heading">試したけど良くなかった方法</h2>
-
-    <p>
-      Loopbackを知るまでにいろいろ試行錯誤したものの、うまくいかなかった方法も参考のために残しておきます。
-    </p>
-
-    <h3 class="Heading">
-      オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法
-    </h3>
-
-    <p>
-      わたしの使っているオーディオインターフェースSSL2には入力が2chあって、lchぶん空きがあるため、そこに効果音・BGMを流し込めばやりたいことができるのではと考えてやってみました。接続には、ミニプラグ(オス)-XLR(オス)変換ケーブルを使いました。
-    </p>
-
-    <p>
-      しかしこれだと、どうしてもチャンネル2にノイズがのってしまったり、まともに音が入らなかったりしてダメでした。変換ケーブルの品質問題かと思い3種類くらい試してみたのですが、どれもダメです。フォン端子はステレオなのに対しXLRはモノラルです。このあたりの違いがノイズの原因なのではないかと思っています。
-    </p>
-
-    <div class="Image">
-      <img
-        class="Image-body"
-        src="Audio broadcast - Mix with Audio Interface.jpg"
-        alt="Audio broadcast - Mix with Audio Interface"
-      />
-      <p class="Image-caption">
-        ノートパソコンのヘッドフォン端子から、オーディオインターフェースのチャンネル2に効果音・BGMを流す構成。
-      </p>
-    </div>
-
-    <h3 class="Heading">DAW上でマイクと効果音をミックスした上で配信する方法</h3>
-
-    <p>
-      もう一つは、Ableton
-      Liveのようなオーディオインターフェースにマイクからの入力を流し込んでミックスした上で、ブラウザに出力する方法です。これは可能ではあるのですが、DAW必須というの制約がめんどうです。というのも、声劇以外の用途でもマイクと他の音を混ぜて流したいことがあり、それらのケースにはDAWはオーバースペックだからです。その点、より広いケースを柔軟にカバーできるLoopbackを真ん中に置く方が扱いやすいです。また、iこの構成では、マイクの音をDAW経由でモニターすることになるため遅延が入ります。バッファーのサンプル数を下げることである程度軽減はできますが、やはり気になります。
-    </p>
-
-    <div class="Image">
-      <img
-        class="Image-body"
-        src="Audio broadcast - Mix with Software.jpg"
-        alt="Audio broadcast - Mix with Software"
-      />
-      <p class="Image-caption">
-        DAW上でマイクと効果音・BGMをミックスして流す構成
-      </p>
-    </div>
-
-    <h2 class="Heading">ソフト</h2>
-
-    <h3>
-      <a href="https://rogueamoeba.com/loopback/">Loopback</a>
-    </h3>
-
-    <p>
-      ライブ配信時にソフトやデバイスの音声入出力を任意に繋いでチャンネルごとにミックスできる超絶便利アプリ。これ自身仮想オーディオドライバーとして機能します。
-    </p>
-
-    <h3><a href="https://existential.audio/blackhole/">BlackHole</a></h3>
-
-    <p>
-      仮想オーディオドライバー。スピーカーであると同時にマイクのように機能します。BlackHaleを入力デバイスとして使うと、BlackHoleに向けて出力した音がそのまま入力されます。これにより、ミックスした音をブラウザ等に食わせてネット配信できます。
-    </p>
-
-    <h3>
-      <a href="https://www.ableton.com/ja/products/live-lite/"
-        >Ableton Live Lite</a
-      >
-    </h3>
-
-    <p>APC miniに付いてくるDAW。主に配信用ポン出しソフトとして使います。</p>
-
-    <h2 class="Heading">機械</h2>
-
-    <h3><a href="https://www.solidstatelogic.com/products/ssl2">SSL2</a></h3>
-
-    <p>
-      2チャンネルの入力ポートを備えたオーディオインターフェース。マイク等からの入力音声とDAW等からの出力音声をミックスしてモニタリングできます(ミックス量はノブで調整可)。
-    </p>
-
-    <h3><a href="http://akai-pro.jp/apcmini/">APC mini</a></h3>
-
-    <p>
-      Ableton
-      Liveに接続して使うMIDIコントローラーです。64個のボタンがついており、ソフト上でそれぞれに音源を割り当てて再生したり、フェードをかけるなどの操作行います。
-    </p>
-
-    <h3>
-      <a href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/"
-        >TOMOCA TCC-60</a
-      >
-    </h3>
-
-    <p>
-      フェーダーで信号のON/OFFを切り替えられます。切り替え時にノイズが発生しません。マイクをミュートするために使います。
-    </p>
-  </body>
-</html>
+<h2 data-decor-element="heading2" class="Heading Heading--second">きっかけ</h2><p data-decor-element="paragraph" class="Paragraph">これまで、配信時には<a data-decor-element="link" href="https://jp.yamaha.com/products/music_production/webcasting_mixer/ag03/index.html">YAMAHA AG03</a>という、ネット配信では定番のオーディオインターフェースを使っていたのですが、ちょっとゆえあって、<a data-decor-element="link" href="https://www.solidstatelogic.com/products/ssl2">SSL2</a>に変えました。しかし、変えてみると、これまでのやりかたではうまくいかないことがわかってきました。理由は、AG03とSSL2の機能の違いです。</p><p data-decor-element="paragraph" class="Paragraph">AG03の特徴のひとつに、PC上で再生される音とマイクからの入力を合成して配信できる、ループバック機能があります。一方、SSL2には、そのような便利な機能はありません。違う機種に変えてみて、改めて、AG03はほんとうに便利な機械だったんだなあということを実感しました。PCでの配信をこれからはじめるという方にとりあえず推薦するなら、やはりAG03だと思います。</p><p data-decor-element="paragraph" class="Paragraph">ただ、AG03でのループバックモードでの配信について改めて考えると、声劇のような多人数同時配信では、他の人の声も拾って自分の端末から再配信していることになるはずなので、共演者の声が二重に聴こえてしまうのではないかという懸念があります。自分の過去の配信でそういう問題が出ていなかったのは、ちょっと不思議です。(もしくは問題が出ていたのに気付かなかった?)</p><p data-decor-element="paragraph" class="Paragraph">この記事で説明する方法では、純粋に自分のマイクの音とDAW(デジタル・オーディオ・ワークステーション=音楽制作ソフト)からの音のみを配信するので、他の演者の音声を二重に配信する心配はありません。</p><h2 data-decor-element="heading2" class="Heading Heading--second">LoopbackとBlackHoleでループバックを実現する</h2><p data-decor-element="paragraph" class="Paragraph">BGM・SEのルーティングとミックスをいかにシンプルな構成で実現するか。これにいろいろ苦心しましたが、なかなか完璧な答に辿り着けませんでした。が、<a data-decor-element="link" href="https://rogueamoeba.com/loopback/">Loopback</a>というアプリに出会って、ついにやりたいことが簡潔に実現できました。</p><p data-decor-element="paragraph" class="Paragraph">Loopbackを使えば、オーディオデバイスやアプリのオーディオ出力を繋いでまとめたり、スプリットしたりが自由にできます。チャンネルごとに配線できるので、モノラルの音声をステレオに変換したり、ステレオをモノラルにまとめたりもできます。Loopbackはそれ自体、仮想オーディオ出力デバイスとして使えます。</p><p data-decor-element="paragraph" class="Paragraph">もうひとつキーになるソフトが、<a data-decor-element="link" href="https://existential.audio/blackhole/">BlackHole</a>という仮想オーディオデバイスで、これひとつで出力デバイス兼入力デバイスとして機能します。このデバイスに対して音を流し込むと、このデバイスを入力として使っているアプリにその音をそのまま取り込めます。つまり、Loopback上でミックスした音をブラウザ等から配信できるのです。</p><p data-decor-element="paragraph" class="Paragraph">LoopbackとBlackHoleを合わせれば、およそ配信時にやりたいどんな構成でも実現できると思います。</p><p data-decor-element="paragraph" class="Paragraph">![Audio broadcast - Mix with Loopback.app](Audio broadcast - Mix with Loopback.app.jpg "図1 Loopbackでマイクと効果音・BGMをミックスして、BlackHoleからブラウザに流す構成")</p><p data-decor-element="paragraph" class="Paragraph">マイクの入力は、オーディオインターフェースを通じて、図1のVoiceというラベルのついた線でLoopbackに流し込みます。</p><p data-decor-element="paragraph" class="Paragraph">BGM・SEは、音源を再生できるアプリならなんでもいいのですが、わたしは、<a data-decor-element="link" href="http://akai-pro.jp/apcmini/">PC mini</a>というMIDIコントローラーについてきた<a data-decor-element="link" href="https://www.ableton.com/ja/products/live-lite/">Ableton Live Lite</a>というDAWを使っています。DAWの出力デバイスを図2のようにLoopbackにすると、LoopbackのPass-Thruソースから信号が入ってきます(後述)。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="DAW_Output.png" alt="DAW Output">
+            <figcaption data-decor-content="title" class="Image-caption">図2 DAWの出力先はLoopback</figcaption>
+        </figure><p></p><p data-decor-element="paragraph" class="Paragraph">それらの信号は、図3のようにLoopback上でミックスされ、BlackHoleに再出力されます(Channels 1&amp;2)。オーディオインターフェースからの入力(マイク)をオーディオインターフェースにもどしてしまうと、モニタリング時に遅延が生じて気持ち悪いので、オーディオンターフェースからの音はBlackHoleにのみ流します。逆にPath-Thruから入ってきたBGM・SEは、二手に分岐させて片方をオーディオインターフェースに流します(Channels 3&amp;4)。BlackHoleはブラウザへの入力用、オーディオインターフェースはBGM・SEのモニター用です。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="Loopback.png" alt="Loopback Configuration">
+            <figcaption data-decor-content="title" class="Image-caption">図3 Loopbackの設定。オーディオインターフェースと任意のアプリの音をミックスして、それを再度BlackHoleとオーディオインターフェースに分割出力する</figcaption>
+        </figure><p></p><p data-decor-element="paragraph" class="Paragraph">PCのデフォルト出力は図4のようにオーディオインターフェースを直接指定します。Loopbackを指定すると共演者の音声まで再配信してしまうことになるので注意してください。逆に個人配信のフリートークなどで、PC上で再生される音すべて拾ってストリーミングしたい場合は、Loopbackを指定すれば良いです。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="Sound_Output.png" alt="B Sound Output">
+            <figcaption data-decor-content="title" class="Image-caption">図4 PCの出力(=共演者の音声)はオーディオインターフェースへダイレクトに出す</figcaption>
+        </figure><p></p><p data-decor-element="paragraph" class="Paragraph">SSL2には、XLRケーブル入ってきた音と、USBから入ってきた音(=PCからの出力)をどの程度の割合でスピーカーやヘッドフォンに出すかをモニターミックスノブで調整する機能が搭載されています。この構成では、自分の声は、オーディオインターフェースでダイレクトニモニター、BGM・効果音はPCからUSBを通って流れてくるくるため、モニターミックスノブは、INPUTとUSB
+  を半々にしておきます。これで、共演者の声を含めすべての音声をモニタリングできるようになります。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="SSL2_Monitor_Knob.jpg" alt="SSL2 Monitor Knob">
+            <figcaption data-decor-content="title" class="Image-caption">図5 モニターミックスノブは半々でミックス</figcaption>
+        </figure><p></p><h3 data-decor-element="heading3" class="Heading">ミュートの実現方法</h3><p data-decor-element="paragraph" class="Paragraph">声劇中、人のセリフの間は自分のマイクをミュートしておきたいですよね。PCからの配信では、ブラウザ上のミュートボタンをマウスでクリックすると「カチッ」という音が入ってしまうし、操作も煩雑なのでなるべく避けたいです。AG03では、フェーダーを下げるという操作でミュートができていました。SSL2にもチャンネルごとにゲインノブがあるので、これを0にすればミュートできる…と思っていたのです。ところが、SSL2のゲインノブは0まで下げてもミュートにならず、うっすら音が入ってきてしまうのです。これはそういう<a data-decor-element="link" href="https://solidstatelogic.zendesk.com/hc/en-us/articles/360018471777-I-still-see-meters-when-gain-is-all-the-way-down">仕様</a>のようです。なので、別の方法でミュートを実現する必要があります。</p><p data-decor-element="paragraph" class="Paragraph">まず、パッと思いついたのが、パッシブプリアンプと呼ばれる、信号増幅を行なわない純粋にレベル調整のみを行う装置をマイクとの間に挟めば、AG03のフェーダーと同じような機能を実現できるのではないかということでした。そこで、<a data-decor-element="link" href="https://www.behringer.com/product.html?modelCode=P0C9G">Behringer社のMONITOR1</a>という商品を試してみました。ところが、これはノブやスイッチの操作をしたときに「バリバリッ」という強烈なノイズが走ってしまいます。これでは、目的の用途には使えません(※すぐ返品しました)。</p><p data-decor-element="paragraph" class="Paragraph">そこで、もっといい何かがないかと探していたところ見つけたのが、<a data-decor-element="link" href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/">TOMOCA TCC-60</a>。これはいわゆる<a data-decor-element="link" href="https://ja.wikipedia.org/wiki/%E3%82%AB%E3%83%95%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9">カフ</a>というやつで、プロのナレーターの方なんかも現場で使っているようなものです。商品説明にもON/OFF時に雑音を発生しないとあったため、これならイケるかも、と思って試してみたところ、見事に機能してくれました。すばらしい商品です。使っていると、なんかプロっぽい気分になれるという副次効果もあります。ただし、ニッチ向けの商品のため約4万円とかなり高額です。</p><h2 data-decor-element="heading2" class="Heading Heading--second">試したけど良くなかった方法</h2><p data-decor-element="paragraph" class="Paragraph">Loopbackを知るまでにいろいろ試行錯誤したものの、うまくいかなかった方法も参考のために残しておきます。</p><h3 data-decor-element="heading3" class="Heading">オーディオインターフェースのチャンネル2にDAWからの出力を流し込んでマイクと効果音をミックスする方法</h3><p data-decor-element="paragraph" class="Paragraph">わたしの使っているオーディオインターフェースSSL2には入力が2chあって、lchぶん空きがあるため、そこに効果音・BGMを流し込めばやりたいことができるのではと考えてやってみました。接続には、ミニプラグ(オス)-XLR(オス)変換ケーブルを使いました。</p><p data-decor-element="paragraph" class="Paragraph">しかしこれだと、どうしてもチャンネル2にノイズがのってしまったり、まともに音が入らなかったりしてダメでした。変換ケーブルの品質問題かと思い3種類くらい試してみたのですが、どれもダメです。フォン端子はステレオなのに対しXLRはモノラルです。このあたりの違いがノイズの原因なのではないかと思っています。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="Audio_broadcast-Mix_with_Audio_Interface.jpg" alt="Audio broadcast - Mix with Audio Interface">
+            <figcaption data-decor-content="title" class="Image-caption">図6 ノートパソコンのヘッドフォン端子から、オーディオインターフェースのチャンネル2に効果音・BGMを流す構成</figcaption>
+        </figure><p></p><h3 data-decor-element="heading3" class="Heading">DAW上でマイクと効果音をミックスした上で配信する方法</h3><p data-decor-element="paragraph" class="Paragraph">もう一つは、Ableton Liveのようなオーディオインターフェースにマイクからの入力を流し込んでミックスした上で、ブラウザに出力する方法です。これは可能ではあるのですが、DAW必須というの制約がめんどうです。というのも、声劇以外の用途でもマイクと他の音を混ぜて流したいことがあり、それらのケースにはDAWはオーバースペックだからです。その点、より広いケースを柔軟にカバーできるLoopbackを真ん中に置く方が扱いやすいです。また、iこの構成では、マイクの音をDAW経由でモニターすることになるため遅延が入ります。バッファーのサンプル数を下げることである程度軽減はできますが、やはり気になります。</p><p data-decor-element="paragraph" class="Paragraph"></p><figure data-decor-element="image" class="Image">
+            <img data-decor-attribute-src="url" data-decor-attribute-alt="description" class="Image-body" src="Audio_broadcast-Mix_with_Software.jpg" alt="Audio broadcast - Mix with Software">
+            <figcaption data-decor-content="title" class="Image-caption">図7 DAW上でマイクと効果音・BGMをミックスして流す構成</figcaption>
+        </figure><p></p><h2 data-decor-element="heading2" class="Heading Heading--second">ソフト</h2><h3 data-decor-element="heading3" class="Heading"><a data-decor-element="link" href="https://rogueamoeba.com/loopback/">Loopback</a></h3><p data-decor-element="paragraph" class="Paragraph">ライブ配信時にソフトやデバイスの音声入出力を任意に繋いでチャンネルごとにミックスできる超絶便利アプリ。これ自身仮想オーディオドライバーとして機能します。</p><h3 data-decor-element="heading3" class="Heading"><a data-decor-element="link" href="https://existential.audio/blackhole/">BlackHole</a></h3><p data-decor-element="paragraph" class="Paragraph">仮想オーディオドライバー。スピーカーであると同時にマイクのように機能します。BlackHaleを入力デバイスとして使うと、BlackHoleに向けて出力した音がそのまま入力されます。これにより、ミックスした音をブラウザ等に食わせてネット配信できます。</p><p data-decor-element="paragraph" class="Paragraph"><a data-decor-element="link" href="https://www.ableton.com/ja/products/live-lite/">Ableton Live Lite</a></p><p data-decor-element="paragraph" class="Paragraph">APC miniに付いてくるDAW。主に配信用ポン出しソフトとして使います。</p><h2 data-decor-element="heading2" class="Heading Heading--second">機械</h2><h3 data-decor-element="heading3" class="Heading"><a data-decor-element="link" href="https://www.solidstatelogic.com/products/ssl2">SSL2</a></h3><p data-decor-element="paragraph" class="Paragraph">2チャンネルの入力ポートを備えたオーディオインターフェース。マイク等からの入力音声とDAW等からの出力音声をミックスしてモニタリングできます(ミックス量はノブで調整可)。</p><h3 data-decor-element="heading3" class="Heading"><a data-decor-element="link" href="http://akai-pro.jp/apcmini/">APC mini</a></h3><p data-decor-element="paragraph" class="Paragraph">Ableton Liveに接続して使うMIDIコントローラーです。64個のボタンがついており、ソフト上でそれぞれに音源を割り当てて再生したり、フェードをかけるなどの操作行います。</p><p data-decor-element="paragraph" class="Paragraph"><a data-decor-element="link" href="https://www.tomoca.co.jp/brand/tomoca-p/top-cough/tcc-60/">TOMOCA TCC-60</a></p><p data-decor-element="paragraph" class="Paragraph">フェーダーで信号のON/OFFを切り替えられます。切り替え時にノイズが発生しません。マイクをミュートするために使います。</p></body></html>
