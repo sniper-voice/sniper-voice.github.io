@@ -28,7 +28,7 @@ Loopbackを使えば、オーディオデバイスやアプリのオーディオ
 
 LoopbackとBlackHoleを合わせれば、およそ配信時にやりたいどんな構成でも実現できると思います。
 
-![Audio broadcast - Mix with Loopback.app](Audio broadcast - Mix with Loopback.app.jpg "図1 Loopbackでマイクと効果音・BGMをミックスして、BlackHoleからブラウザに流す構成")
+![Audio broadcast - Mix with Loopback.app](Audio_broadcast-Mix_with_Loopback.app.jpg "図1 Loopbackでマイクと効果音・BGMをミックスして、BlackHoleからブラウザに流す構成")
 
 マイクの入力は、オーディオインターフェースを通じて、図1のVoiceというラベルのついた線でLoopbackに流し込みます。
 
