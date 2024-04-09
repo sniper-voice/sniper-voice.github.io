@@ -489,16 +489,27 @@
                 </p>
                 <p>
                     まず、映像に関して。声劇配信において、ほとんどの人は静止画一枚を表示するだけだと思うので、高いビットレートは不要です。そもそも映像なしでも声劇は成立しますしね。
+                    また、キーフレーム間隔をデフォルトの0(自動)で配信したところ、ツイキャス側ではじかれるという事故が一度あったため、2秒に設定しています。
                 </p>
                 <div class="Image Image--mini">
                     <img
                         class="Image-body"
-                        src="OBS-Bitrate-Config.png"
-                        alt="配信ビットレートの設定"
+                        src="OBS-Video-Bitrate-Config.png"
+                        alt="映像配信ビットレートの設定"
                     />
                 </div>
                 <p>
-                    それから、音声に関してですが、高ければ高いほどいい、と言いたいところですが、そもそも入口であるDiscordのビットレートが制限されているため、それ以上高くしてもあまり意味がありません。Discordの無料サーバーだと最大96Kbpsです。Discord経由で入ってくる他の演者の音質と揃えるという意味で、OBSの音質もDiscordに合わせておいたほうがいいでしょう。
+                    それから、音声に関してですが、高ければ高いほどいい、と言いたいところですが、そもそも入口であるDiscordのビットレートが制限されているため、それ以上高くしてもあまり意味がありません。Discordの無料サーバーだと最大96Kbpsです。
+                </p>
+                <div class="Image Image--mini">
+                    <img
+                        class="Image-body"
+                        src="OBS-Audio-Bitrate-Config.png"
+                        alt="音声配信ビットレートの設定"
+                    />
+                </div>
+                <p>
+                    Discord経由で入ってくる他の演者の音質と揃えるという意味で、OBSの音質もDiscordに合わせておいたほうがいいでしょう。
                 </p>
                 <div class="Image Image--mini">
                     <img
