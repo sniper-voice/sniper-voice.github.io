@@ -1,0 +1,119 @@
+/* SUIT CSS Convention for Review Pages */
+.Review {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+    line-height: 1.8;
+    color: #333;
+    background-color: #fff;
+}
+
+.Review-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e5e5e5;
+    color: #2c3e50;
+}
+
+.Review-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.Review-content {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.Review-content--intro {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: #f8f9fa;
+    border-left: 4px solid #007bff;
+    border-radius: 4px;
+}
+
+.Review-link {
+    display: inline-block;
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.Review-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.Review-signature {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #e5e5e5;
+    text-align: right;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Responsive Design for Smartphones */
+@media (max-width: 768px) {
+    .Review {
+        padding: 16px;
+        margin: 0 16px;
+    }
+    
+    .Review-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .Review-content {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+    
+    .Review-content--intro {
+        font-size: 1rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .Review-image {
+        margin: 1.5rem auto;
+    }
+}
+
+@media (max-width: 480px) {
+    .Review {
+        padding: 12px;
+        margin: 0 8px;
+    }
+    
+    .Review-title {
+        font-size: 1.3rem;
+        line-height: 1.4;
+    }
+    
+    .Review-content {
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+    
+    .Review-content--intro {
+        font-size: 0.95rem;
+        padding: 0.8rem;
+    }
+}
