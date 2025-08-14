@@ -59,6 +59,19 @@
     color: white;
 }
 
+.Review-inlineLink {
+    color: #6366f1;
+    text-decoration: underline;
+    text-decoration-color: rgba(99, 102, 241, 0.4);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.Review-inlineLink:hover {
+    color: #4f46e5;
+    text-decoration-color: #4f46e5;
+}
+
 .Review-signature {
     margin-top: 3rem;
     padding-top: 2rem;
